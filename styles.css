@@ -119,7 +119,10 @@ body.opening-off .opening{display:none}
   .opening__corner--tr,.opening__corner--br{right:1.2rem}
 }
 @media(prefers-reduced-motion:reduce){
-  .opening{display:none}
+  /* keep the loader visible, but drop continuous/large motion */
+  .opening__corner,.opening__eyebrow,.opening__mark,.opening__name,.opening__progress,.opening__dots,.opening__skip{opacity:1;animation:none;transform:none}
+  .opening__ring,.opening__ring-2{animation:none}
+  .opening__dots span{animation:none;opacity:.55}
 }
 
 /* ===========================================================

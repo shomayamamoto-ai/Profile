@@ -29,8 +29,7 @@
     setTimeout(function () { document.body.classList.add('opening-off'); }, 900);
   }
 
-  if (!opening || reduce) {
-    // skip the movie entirely
+  if (!opening) {
     document.body.classList.add('opening-off');
     window.scrollTo(0, 0);
     revealHero();
