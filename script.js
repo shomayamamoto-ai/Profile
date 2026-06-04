@@ -141,14 +141,15 @@
     }, { passive: true });
   }
 
-  /* ---------- Custom cursor ---------- */
+  /* ---------- Custom cursor (original ring + dot) ---------- */
   var cursor = document.getElementById('cursor');
   var cursorDot = document.getElementById('cursorDot');
   var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-  if (cursor && fine && !reduce) {
+  if (cursor && fine) {
     document.body.classList.add('cursor-on');
     var label = cursor.querySelector('.cursor__label');
     var cx = window.innerWidth / 2, cy = window.innerHeight / 2, tx = cx, ty = cy;
+    var ease = reduce ? 1 : 0.2; // snap instantly when reduced motion is requested
     document.addEventListener('mousemove', function (e) {
       tx = e.clientX; ty = e.clientY;
       cursor.classList.add('visible');
@@ -162,7 +163,7 @@
       if (cursorDot) cursorDot.classList.remove('visible');
     });
     (function loop() {
-      cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
+      cx += (tx - cx) * ease; cy += (ty - cy) * ease;
       cursor.style.transform = 'translate(' + cx + 'px,' + cy + 'px) translate(-50%,-50%)';
       requestAnimationFrame(loop);
     })();

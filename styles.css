@@ -162,19 +162,19 @@ body.opening-off .opening{display:none}
    CUSTOM CURSOR
    =========================================================== */
 .cursor{
-  position:fixed;top:0;left:0;width:38px;height:38px;border-radius:50%;
-  border:1.4px solid #fff;pointer-events:none;z-index:1200;
+  position:fixed;top:0;left:0;width:40px;height:40px;border-radius:50%;
+  border:2px solid #fff;pointer-events:none;z-index:1200;
   transform:translate(-50%,-50%);
   transition:width .3s var(--ease),height .3s var(--ease),background .3s var(--ease),border-color .3s var(--ease),opacity .3s;
   display:none;align-items:center;justify-content:center;mix-blend-mode:difference;
 }
 .cursor.visible{display:flex}
-.cursor.hover{width:76px;height:76px;background:#fff;border-color:transparent}
-.cursor__label{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#000;opacity:0;transition:opacity .25s;white-space:nowrap;mix-blend-mode:difference}
+.cursor.hover{width:78px;height:78px;background:#fff;border-color:transparent}
+.cursor__label{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:#000;opacity:0;transition:opacity .25s;white-space:nowrap;mix-blend-mode:difference}
 .cursor.hover .cursor__label{opacity:1}
 /* precise inner dot (no lag) */
 .cursor-dot{
-  position:fixed;top:0;left:0;width:7px;height:7px;border-radius:50%;
+  position:fixed;top:0;left:0;width:8px;height:8px;border-radius:50%;
   background:var(--accent);pointer-events:none;z-index:1201;
   transform:translate(-50%,-50%);display:none;
 }
