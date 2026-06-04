@@ -263,8 +263,6 @@ body.menu-open .nav__burger span:nth-child(2){bottom:9px;transform:rotate(-45deg
 .hero__lede{font-size:clamp(.95rem,2.2vw,1.18rem);font-weight:300;line-height:2;max-width:540px;margin-bottom:24px;color:#f5efe6}
 .hero__tags{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:38px}
 .hero__tags span{font-size:.78rem;letter-spacing:.04em;border:1px solid rgba(255,253,249,.45);border-radius:40px;padding:7px 16px;backdrop-filter:blur(4px)}
-.hero__tags span::before{content:"“"}
-.hero__tags span::after{content:"”"}
 .hero__actions{display:flex;flex-wrap:wrap;gap:14px}
 .hero__actions .btn--solid{background:var(--paper);color:var(--ink)}
 .hero__actions .btn--solid:hover{background:var(--accent);color:var(--paper)}
@@ -722,3 +720,7 @@ body{font-weight:400}
 }
 .mbar__btn--mail{background:var(--ink);color:#fff}
 .mbar__btn + .mbar__btn{border-left:1px solid var(--line)}
+
+/* mobile-only line breaks */
+.br-sp{display:none}
+@media (max-width:600px){ .br-sp{display:block} }
