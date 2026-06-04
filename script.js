@@ -4,21 +4,56 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var doc = document.documentElement;
 
-  /* ---------- Preloader ---------- */
-  document.body.classList.add('is-loading');
-  var loader = document.getElementById('loader');
-  function endLoad() {
+  /* ---------- Opening movie ---------- */
+  var opening = document.getElementById('opening');
+  var heroEl = document.querySelector('.hero');
+  var ended = false;
+
+  function revealHero() { if (heroEl) heroEl.classList.add('in-line'); }
+  function endOpening() {
+    if (ended) return;
+    ended = true;
     document.body.classList.remove('is-loading');
-    if (loader) loader.classList.add('done');
-    // kick off hero line reveal
-    var hero = document.querySelector('.hero');
-    if (hero) hero.classList.add('in-line');
+    if (opening) opening.classList.add('done');
+    revealHero();
+    // fully remove from layout after fade
+    setTimeout(function () { document.body.classList.add('opening-off'); }, 900);
+    try { sessionStorage.setItem('introPlayed', '1'); } catch (e) {}
   }
-  window.addEventListener('load', function () {
-    setTimeout(endLoad, reduce ? 0 : 1500);
-  });
-  // safety: never hang
-  setTimeout(endLoad, 3200);
+
+  var alreadyPlayed = false;
+  try { alreadyPlayed = sessionStorage.getItem('introPlayed') === '1'; } catch (e) {}
+
+  if (!opening || reduce || alreadyPlayed) {
+    // skip the movie entirely
+    document.body.classList.add('opening-off');
+    revealHero();
+  } else {
+    document.body.classList.add('is-loading');
+    // preload montage images so frames are ready
+    ['assets/img/work1.webp', 'assets/img/work2.webp'].forEach(function (src) {
+      var im = new Image(); im.src = src;
+    });
+    var started = false;
+    function play() {
+      if (started) return;
+      started = true;
+      opening.classList.add('play');
+      // total timeline ~3.8s, then fade out
+      setTimeout(endOpening, 3800);
+    }
+    // start after load, or after a short cap so we never stall
+    if (document.readyState === 'complete') setTimeout(play, 200);
+    else window.addEventListener('load', function () { setTimeout(play, 150); });
+    setTimeout(play, 1600);           // cap: begin even if load is slow
+    setTimeout(endOpening, 6500);     // hard safety: never hang
+
+    var skip = document.getElementById('openingSkip');
+    if (skip) skip.addEventListener('click', endOpening);
+    opening.addEventListener('click', function (e) {
+      if (e.target === opening) endOpening();
+    });
+  }
 
   /* ---------- Year ---------- */
   var y = document.getElementById('year');

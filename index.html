@@ -33,6 +33,7 @@
 <link rel="preload" as="image" href="assets/img/hero.webp" type="image/webp" />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@300;400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+<noscript><style>.opening{display:none!important}.reveal,.line>span{opacity:1!important;transform:none!important}</style></noscript>
 
 <!-- Structured data -->
 <script type="application/ld+json">
@@ -61,13 +62,26 @@
 
 <a href="#works" class="skip-link">本文へスキップ</a>
 
-<!-- ░░ Preloader ░░ -->
-<div class="loader" id="loader" aria-hidden="true">
-  <div class="loader__inner">
-    <span class="loader__name">SHOMA</span>
-    <span class="loader__bar"><i></i></span>
-    <span class="loader__role">Model &nbsp;/&nbsp; Actor</span>
+<!-- ░░ Opening movie ░░ -->
+<div class="opening" id="opening" aria-hidden="true">
+  <div class="opening__frames">
+    <div class="opening__frame opening__frame--1"></div>
+    <div class="opening__frame opening__frame--2"></div>
+    <div class="opening__frame opening__frame--3"></div>
+    <div class="opening__grain"></div>
+    <div class="opening__veil"></div>
   </div>
+  <div class="opening__bar opening__bar--top"></div>
+  <div class="opening__bar opening__bar--bottom"></div>
+
+  <div class="opening__titles">
+    <p class="opening__eyebrow"><span>Model &nbsp;/&nbsp; Actor &nbsp;—&nbsp; Kanto, Japan</span></p>
+    <h1 class="opening__name"><span class="line"><span>SHOMA</span></span></h1>
+    <p class="opening__tagline"><span class="line"><span>画面に残る、人になる。</span></span></p>
+  </div>
+
+  <div class="opening__loading"><i></i></div>
+  <button class="opening__skip" id="openingSkip" type="button">Skip <em>↦</em></button>
 </div>
 
 <!-- ░░ Custom cursor (desktop) ░░ -->

@@ -54,26 +54,78 @@ ul,ol{list-style:none}
 .hero__media picture,.works__shot picture{display:block;width:100%;height:100%}
 
 /* ===========================================================
-   PRELOADER
+   OPENING MOVIE
    =========================================================== */
-.loader{
-  position:fixed;inset:0;z-index:999;background:var(--ink);
+.opening{
+  position:fixed;inset:0;z-index:999;background:#0c0906;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
-  transition:opacity .7s var(--ease),visibility .7s var(--ease);
+  transition:opacity .8s var(--ease),visibility .8s var(--ease);
+  animation:openingSafety .8s var(--ease) 7s forwards; /* fail-safe if JS stalls */
 }
-.loader.done{opacity:0;visibility:hidden}
-.loader__inner{display:flex;flex-direction:column;align-items:center;gap:18px}
-.loader__name{
-  font-family:var(--display);font-weight:500;letter-spacing:.34em;
-  font-size:clamp(1.6rem,5vw,2.6rem);color:var(--paper);padding-left:.34em;
-  opacity:0;animation:loadFade .9s var(--ease) .1s forwards;
+@keyframes openingSafety{to{opacity:0;visibility:hidden;pointer-events:none}}
+.opening.done{opacity:0;visibility:hidden}
+body.opening-off .opening{display:none}
+
+/* montage frames */
+.opening__frames{position:absolute;inset:0}
+.opening__frame{position:absolute;inset:0;background-size:cover;background-position:50% 30%;opacity:0}
+.opening__frame--1{background-image:url("assets/img/hero.webp")}
+.opening__frame--2{background-image:url("assets/img/work1.webp");background-position:50% 28%}
+.opening__frame--3{background-image:url("assets/img/work2.webp");background-position:50% 26%}
+.opening__veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,9,6,.55),rgba(12,9,6,.35) 40%,rgba(12,9,6,.8))}
+.opening__grain{position:absolute;inset:0;opacity:.07;pointer-events:none;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* cinematic letterbox bars */
+.opening__bar{position:absolute;left:0;right:0;height:14vh;background:#0c0906;z-index:3}
+.opening__bar--top{top:0;transform:translateY(-100%)}
+.opening__bar--bottom{bottom:0;transform:translateY(100%)}
+
+/* titles */
+.opening__titles{position:relative;z-index:4;text-align:center;color:var(--paper);padding:0 24px}
+.opening__eyebrow{font-family:var(--mono);font-size:clamp(.62rem,2vw,.78rem);letter-spacing:.28em;text-transform:uppercase;color:var(--accent-2);margin-bottom:18px;opacity:0}
+.opening__eyebrow span{display:inline-block}
+.opening__name{font-family:var(--display);font-weight:500;font-style:italic;font-size:clamp(3.4rem,15vw,9rem);letter-spacing:.06em;line-height:1;margin-bottom:14px}
+.opening__name .line>span{padding:0 .06em}
+.opening__tagline{font-family:var(--serif);font-weight:300;font-size:clamp(1rem,3.4vw,1.6rem);letter-spacing:.08em;color:#f1e9df}
+
+/* loading shimmer (before play) */
+.opening__loading{position:absolute;bottom:7vh;left:50%;transform:translateX(-50%);z-index:4;width:120px;height:1.5px;background:rgba(243,239,232,.16);overflow:hidden;border-radius:2px}
+.opening__loading i{position:absolute;inset:0;width:40%;background:var(--accent);animation:openLoad 1s var(--ease) infinite}
+@keyframes openLoad{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
+
+.opening__skip{position:absolute;bottom:6vh;right:clamp(20px,5vw,48px);z-index:5;background:transparent;border:1px solid rgba(243,239,232,.35);color:var(--paper);
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;padding:9px 18px;border-radius:40px;cursor:pointer;opacity:0;transition:opacity .5s,background .3s,color .3s}
+.opening__skip em{font-style:normal;margin-left:4px}
+.opening__skip:hover{background:var(--paper);color:var(--ink)}
+
+/* ---- timeline: starts when .play is added ---- */
+.opening.play .opening__loading{opacity:0;transition:opacity .3s}
+.opening.play .opening__skip{opacity:.85;transition-delay:.4s}
+.opening.play .opening__bar--top{animation:barInTop .7s var(--ease) forwards, barOutTop .7s var(--ease) 3.1s forwards}
+.opening.play .opening__bar--bottom{animation:barInBottom .7s var(--ease) forwards, barOutBottom .7s var(--ease) 3.1s forwards}
+@keyframes barInTop{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+@keyframes barInBottom{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes barOutTop{from{transform:translateY(0)}to{transform:translateY(-100%)}}
+@keyframes barOutBottom{from{transform:translateY(0)}to{transform:translateY(100%)}}
+.opening.play .opening__frame--1{animation:frameCut 2s var(--ease) .15s forwards}
+.opening.play .opening__frame--2{animation:frameCut 1.6s var(--ease) 1.5s forwards}
+.opening.play .opening__frame--3{animation:frameHold 1.6s var(--ease) 2.5s forwards}
+@keyframes frameCut{0%{opacity:0;transform:scale(1.04)}14%{opacity:1}82%{opacity:1}100%{opacity:0;transform:scale(1.13)}}
+@keyframes frameHold{0%{opacity:0;transform:scale(1.05)}18%{opacity:1}100%{opacity:1;transform:scale(1.14)}}
+.opening.play .opening__eyebrow{animation:openFade .9s var(--ease) .5s forwards, openOut .6s var(--ease) 3s forwards}
+.opening.play .opening__name .line>span{transition:transform 1s var(--ease-out) .8s;transform:translateY(0)}
+.opening.play .opening__tagline .line>span{transition:transform 1s var(--ease-out) 1.5s;transform:translateY(0)}
+.opening.play .opening__titles{animation:openOut .6s var(--ease) 3s forwards}
+@keyframes openFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes openOut{to{opacity:0;transform:translateY(-10px)}}
+
+/* before play, mask the name lines */
+.opening .opening__name .line>span,.opening .opening__tagline .line>span{transform:translateY(110%)}
+
+@media(prefers-reduced-motion:reduce){
+  .opening{display:none}
 }
-.loader__bar{display:block;width:160px;height:1.5px;background:rgba(243,239,232,.18);overflow:hidden;border-radius:2px}
-.loader__bar i{display:block;height:100%;width:100%;background:var(--accent);transform:translateX(-100%);animation:loadBar 1.3s var(--ease) .25s forwards}
-.loader__role{font-family:var(--mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent-2);opacity:0;animation:loadFade .9s var(--ease) .45s forwards}
-@keyframes loadFade{to{opacity:1}}
-@keyframes loadBar{to{transform:translateX(0)}}
-@media(prefers-reduced-motion:reduce){.loader__name,.loader__role{opacity:1;animation:none}.loader__bar i{animation:none;transform:none}}
 
 /* ===========================================================
    CUSTOM CURSOR
