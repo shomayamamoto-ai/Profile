@@ -541,12 +541,10 @@ body.menu-open .nav__burger span:nth-child(2){bottom:9px;transform:rotate(-45deg
 .intro__v a{color:var(--ink);border-color:var(--accent)}
 .intro__v a:hover{color:var(--accent)}
 
-/* ---- Works: editorial masonry (varied heights) ---- */
-.works__gallery{display:block;column-count:2;column-gap:clamp(14px,2.6vw,30px)}
-.works__shot{break-inside:avoid;width:100%;margin:0 0 clamp(14px,2.6vw,30px);display:block}
-.works__shot:first-child,.works__shot:last-child{margin-top:0}
-.works__frame img{aspect-ratio:auto;height:auto}
-@media(max-width:640px){.works__gallery{column-count:1}}
+/* ---- Works: uniform grid cards (restored from masonry) ---- */
+.works__gallery{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.5vw,28px)}
+.works__shot{margin:0!important;width:auto;display:block}
+.works__frame img{aspect-ratio:3/4;height:100%}
 .credit:hover{border-color:var(--accent)}
 
 /* ---- What I do (was dark gradients) ---- */
