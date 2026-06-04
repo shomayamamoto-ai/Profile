@@ -732,3 +732,6 @@ body{font-weight:400}
 /* comp spec inline link (e.g. Agency) */
 .comp__specs dd a{border-bottom:1px solid var(--accent);transition:color .3s}
 .comp__specs dd a:hover{color:var(--accent)}
+
+/* hide on-photo caption labels (STAGE / MV, etc.) */
+.works__cap{display:none!important}
