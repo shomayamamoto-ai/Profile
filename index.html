@@ -6,6 +6,7 @@
 <title>しょーま｜SHOMA — Model / Actor</title>
 <meta name="description" content="しょーま（SHOMA）— 関東を拠点に活動するモデル / 俳優。CM・MV・スチール・ランウェイ。画面に残る、人になる。出演・撮影のご相談はこちらから。" />
 <meta name="author" content="Shoma Yamamoto" />
+<meta name="theme-color" content="#15110d" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
@@ -13,20 +14,36 @@
 <meta property="og:description" content="画面に残る、人になる。CM・MV・スチール・ランウェイまで。関東 / 全国相談可。" />
 <meta property="og:image" content="assets/img/hero.jpeg" />
 <meta property="og:locale" content="ja_JP" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Favicon (inline SVG) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315110d'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='38' fill='%23b5462e' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@300;400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@300;400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+<!-- ░░ Preloader ░░ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <span class="loader__name">SHOMA</span>
+    <span class="loader__bar"><i></i></span>
+    <span class="loader__role">Model &nbsp;/&nbsp; Actor</span>
+  </div>
+</div>
+
+<!-- ░░ Custom cursor (desktop) ░░ -->
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
 
 <!-- ░░ Progress bar ░░ -->
 <div class="scroll-progress" id="progress"></div>
 
 <!-- ░░ Navigation ░░ -->
 <header class="nav" id="nav">
-  <a href="#top" class="nav__brand">SHOMA<span>.</span></a>
+  <a href="#top" class="nav__brand" data-cursor="Top">SHOMA<span>.</span></a>
   <nav class="nav__links">
     <a href="#works">Works</a>
     <a href="#whatido">What I do</a>
@@ -34,43 +51,47 @@
     <a href="#booking">Booking</a>
     <a href="#contact" class="nav__cta">Contact</a>
   </nav>
-  <button class="nav__burger" id="burger" aria-label="メニュー"><span></span><span></span></button>
+  <button class="nav__burger" id="burger" aria-label="メニューを開閉"><span></span><span></span></button>
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#works">Works</a>
-  <a href="#whatido">What I do</a>
-  <a href="#profile">Profile</a>
-  <a href="#booking">Booking</a>
-  <a href="#contact">Contact</a>
+  <a href="#works"><em>01</em> Works</a>
+  <a href="#whatido"><em>02</em> What I do</a>
+  <a href="#profile"><em>03</em> Profile</a>
+  <a href="#booking"><em>04</em> Booking</a>
+  <a href="#contact"><em>05</em> Contact</a>
 </div>
 
 <!-- ░░ Hero ░░ -->
 <section class="hero" id="top">
-  <div class="hero__media">
+  <div class="hero__media" data-parallax>
     <img src="assets/img/hero.jpeg" alt="しょーま ポートレート" />
     <div class="hero__media-grain"></div>
   </div>
+
   <div class="hero__inner">
-    <p class="hero__eyebrow reveal">Model &nbsp;/&nbsp; Actor &nbsp;—&nbsp; Kanto, Japan</p>
+    <p class="hero__eyebrow"><span class="line"><span>Model &nbsp;/&nbsp; Actor &nbsp;—&nbsp; Kanto, Japan</span></span></p>
     <h1 class="hero__title">
-      <span class="reveal" style="--d:.05s">画面に残る、</span>
-      <span class="reveal" style="--d:.18s">人になる。</span>
+      <span class="line"><span>画面に残る、</span></span>
+      <span class="line"><span>人になる。</span></span>
     </h1>
-    <p class="hero__lede reveal" style="--d:.32s">
+    <p class="hero__lede reveal" style="--d:.5s">
       CM・MV・スチール・ランウェイまで。<br />
       派手に前へ出るより、作品の空気に入って、ちゃんと目に止まる表情を。
     </p>
-    <div class="hero__tags reveal" style="--d:.45s">
-      <span>「自然だけど弱くない」</span>
-      <span>「印象に残るけど浮かない」</span>
+    <div class="hero__tags reveal" style="--d:.62s">
+      <span>自然だけど弱くない</span>
+      <span>印象に残るけど浮かない</span>
     </div>
-    <div class="hero__actions reveal" style="--d:.58s">
-      <a href="#works" class="btn btn--solid">Pick up Works</a>
-      <a href="#contact" class="btn btn--ghost">出演の相談</a>
+    <div class="hero__actions reveal" style="--d:.74s">
+      <a href="#works" class="btn btn--solid" data-cursor="View">Pick up Works</a>
+      <a href="#contact" class="btn btn--ghost" data-cursor="Mail">出演の相談</a>
     </div>
   </div>
-  <a href="#intro" class="hero__scroll" aria-label="スクロール">
+
+  <div class="hero__name" aria-hidden="true"><span>SHOMA</span></div>
+
+  <a href="#intro" class="hero__scroll" aria-label="下へスクロール">
     <span>Scroll</span><i></i>
   </a>
 </section>
@@ -88,15 +109,15 @@
       <span class="intro__k">Base</span>
       <span class="intro__v">関東 / 全国相談可</span>
     </div>
-    <div class="intro__cell reveal" style="--d:.1s">
+    <div class="intro__cell reveal" style="--d:.08s">
       <span class="intro__k">On set</span>
       <span class="intro__v">理解が早く、テイクが安定</span>
     </div>
-    <div class="intro__cell reveal" style="--d:.2s">
+    <div class="intro__cell reveal" style="--d:.16s">
       <span class="intro__k">Agency</span>
       <span class="intro__v">AdvoVisions</span>
     </div>
-    <div class="intro__cell reveal" style="--d:.3s">
+    <div class="intro__cell reveal" style="--d:.24s">
       <span class="intro__k">Contact</span>
       <span class="intro__v"><a href="mailto:shoma.yamamoto@lumenium.net">Email</a> / <a href="https://ig.me/m/showstagram.keio" target="_blank" rel="noopener">DM</a></span>
     </div>
@@ -107,16 +128,18 @@
 <section class="section works" id="works">
   <div class="section__head">
     <p class="section__num">01</p>
-    <h2 class="section__title">Pick up Works</h2>
-    <p class="section__sub">まず見てほしい出演実績。映像・写真・ランウェイ、それぞれの“見え方”に合わせます。</p>
+    <h2 class="section__title reveal">Pick up Works</h2>
+    <p class="section__sub reveal" style="--d:.1s">まず見てほしい出演実績。映像・写真・ランウェイ、それぞれの“見え方”に合わせます。</p>
   </div>
 
   <div class="works__gallery">
-    <figure class="works__shot reveal">
-      <img src="assets/img/work1.jpeg" alt="作品カット 01" loading="lazy" />
+    <figure class="works__shot reveal" data-cursor="Zoom" data-full="assets/img/work1.jpeg" data-cap="Still / Look">
+      <img src="assets/img/work1.jpeg" alt="作品カット 01 — スチール" loading="lazy" />
+      <figcaption><span>01</span> Still / Look</figcaption>
     </figure>
-    <figure class="works__shot reveal" style="--d:.12s">
-      <img src="assets/img/work2.jpeg" alt="作品カット 02" loading="lazy" />
+    <figure class="works__shot reveal" style="--d:.12s" data-cursor="Zoom" data-full="assets/img/work2.jpeg" data-cap="Portrait">
+      <img src="assets/img/work2.jpeg" alt="作品カット 02 — ポートレート" loading="lazy" />
+      <figcaption><span>02</span> Portrait</figcaption>
     </figure>
   </div>
 
@@ -147,7 +170,7 @@
 <section class="section fields">
   <div class="section__head">
     <p class="section__num">02</p>
-    <h2 class="section__title">選ばれやすい現場</h2>
+    <h2 class="section__title reveal">選ばれやすい現場</h2>
   </div>
   <div class="fields__row">
     <article class="field reveal">
@@ -172,10 +195,10 @@
 <section class="section whatido" id="whatido">
   <div class="section__head">
     <p class="section__num">03</p>
-    <h2 class="section__title">What I do</h2>
+    <h2 class="section__title reveal">What I do</h2>
   </div>
   <div class="whatido__cols">
-    <article class="role role--model reveal">
+    <article class="role role--model reveal" data-cursor="Model">
       <header>
         <span class="role__emoji">📸</span>
         <h3>Model</h3>
@@ -188,7 +211,7 @@
         <li>ランウェイ / イベント</li>
       </ul>
     </article>
-    <article class="role role--actor reveal" style="--d:.12s">
+    <article class="role role--actor reveal" style="--d:.12s" data-cursor="Actor">
       <header>
         <span class="role__emoji">🎭</span>
         <h3>Actor</h3>
@@ -208,7 +231,7 @@
 <section class="section strengths">
   <div class="section__head">
     <p class="section__num">04</p>
-    <h2 class="section__title">現場で強いところ</h2>
+    <h2 class="section__title reveal">現場で強いところ</h2>
   </div>
   <div class="strengths__row">
     <div class="strength reveal">
@@ -236,10 +259,10 @@
 <section class="section profile" id="profile">
   <div class="section__head">
     <p class="section__num">05</p>
-    <h2 class="section__title">Profile</h2>
+    <h2 class="section__title reveal">Profile</h2>
   </div>
-  <div class="profile__wrap">
-    <dl class="profile__specs reveal">
+  <div class="profile__wrap reveal">
+    <dl class="profile__specs">
       <div><dt>Height</dt><dd>165 cm</dd></div>
       <div><dt>Shoe</dt><dd>25.0 cm</dd></div>
       <div><dt>Language</dt><dd>日本語 / English basic</dd></div>
@@ -255,8 +278,8 @@
 <section class="section booking" id="booking">
   <div class="section__head">
     <p class="section__num">06</p>
-    <h2 class="section__title">Booking</h2>
-    <p class="section__sub">日程だけの確認でも大丈夫です。撮影日、媒体、ざっくりした内容を送ってください。条件や衣装、イメージはそこから詰められます。</p>
+    <h2 class="section__title reveal">Booking</h2>
+    <p class="section__sub reveal" style="--d:.1s">日程だけの確認でも大丈夫です。撮影日、媒体、ざっくりした内容を送ってください。条件や衣装、イメージはそこから詰められます。</p>
   </div>
   <ol class="booking__steps">
     <li class="booking__step reveal">
@@ -288,8 +311,8 @@
       and small movement included.
     </p>
     <div class="english__links">
-      <a href="mailto:shoma.yamamoto@lumenium.net">Email →</a>
-      <a href="https://ig.me/m/showstagram.keio" target="_blank" rel="noopener">Instagram DM →</a>
+      <a href="mailto:shoma.yamamoto@lumenium.net" data-cursor="Mail">Email →</a>
+      <a href="https://ig.me/m/showstagram.keio" target="_blank" rel="noopener" data-cursor="DM">Instagram DM →</a>
     </div>
   </div>
 </section>
@@ -299,16 +322,18 @@
   <div class="contact__inner">
     <p class="contact__eyebrow reveal">Booking &amp; Inquiries</p>
     <h2 class="contact__title reveal" style="--d:.1s">出演・撮影の<br />ご相談はこちらから。</h2>
-    <a href="mailto:shoma.yamamoto@lumenium.net" class="contact__mail reveal" style="--d:.2s">shoma.yamamoto@lumenium.net</a>
+    <a href="mailto:shoma.yamamoto@lumenium.net" class="contact__mail reveal" style="--d:.2s" data-cursor="Copy">shoma.yamamoto@lumenium.net</a>
 
     <div class="contact__channels reveal" style="--d:.3s">
-      <a href="https://ig.me/m/showstagram.keio" class="chan" target="_blank" rel="noopener">
+      <a href="https://ig.me/m/showstagram.keio" class="chan" target="_blank" rel="noopener" data-cursor="Open">
         <span class="chan__k">Instagram DM</span>
         <span class="chan__v">@showstagram.keio</span>
+        <span class="chan__arrow">↗</span>
       </a>
-      <a href="https://advovisions.com/bcd31-home/" class="chan" target="_blank" rel="noopener">
+      <a href="https://advovisions.com/bcd31-home/" class="chan" target="_blank" rel="noopener" data-cursor="Open">
         <span class="chan__k">Agency</span>
         <span class="chan__v">AdvoVisions</span>
+        <span class="chan__arrow">↗</span>
       </a>
     </div>
 
@@ -322,9 +347,23 @@
 
 <footer class="footer">
   <div class="footer__brand">SHOMA<span>.</span></div>
-  <p class="footer__copy">© Shoma. All rights reserved.</p>
-  <a href="#top" class="footer__top">Back to top ↑</a>
+  <p class="footer__copy">© <span id="year">2026</span> Shoma. All rights reserved.</p>
+  <a href="#top" class="footer__top" data-cursor="Top">Back to top ↑</a>
 </footer>
+
+<!-- ░░ Lightbox ░░ -->
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="作品の拡大表示">
+  <button class="lightbox__close" id="lbClose" aria-label="閉じる">✕</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="前へ">‹</button>
+  <figure class="lightbox__stage">
+    <img id="lbImg" src="" alt="" />
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="次へ">›</button>
+</div>
+
+<!-- Floating back-to-top -->
+<a href="#top" class="fab" id="fab" aria-label="トップへ戻る" data-cursor="Top">↑</a>
 
 <script src="script.js"></script>
 </body>
