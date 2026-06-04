@@ -55,50 +55,75 @@ ul,ol{list-style:none}
 .hero__media picture,.works__frame picture{display:block;width:100%;height:100%}
 
 /* ===========================================================
-   OPENING — editorial gate reveal (original to SHOMA)
+   OPENING — cinematic gate reveal (original to SHOMA)
    =========================================================== */
 .opening{
   position:fixed;inset:0;z-index:999;overflow:hidden;background:transparent;
   transition:opacity .7s var(--ease),visibility 0s linear .7s;opacity:1;visibility:visible;
-  animation:openingSafety .7s ease 8s forwards; /* fail-safe if JS stalls */
+  animation:openingSafety .7s ease 8.5s forwards; /* fail-safe if JS stalls */
 }
 @keyframes openingSafety{to{opacity:0;visibility:hidden;pointer-events:none}}
 .opening.done{opacity:0;visibility:hidden;pointer-events:none}
 body.opening-off .opening{display:none}
 
-/* two panels that meet at the centre, then slide apart to reveal the hero */
-.opening__panel{position:absolute;left:0;right:0;height:50.6vh;background:var(--paper);z-index:1;will-change:transform}
-.opening__panel--top{top:0;border-bottom:1px solid var(--line)}
-.opening__panel--bottom{bottom:0;border-top:1px solid var(--line)}
-.opening.split .opening__panel--top{animation:gateUp 1s var(--ease-out) forwards}
-.opening.split .opening__panel--bottom{animation:gateDown 1s var(--ease-out) forwards}
+/* dark gate panels that slide apart to reveal the hero */
+.opening__panel{position:absolute;left:0;right:0;height:50.6vh;z-index:1;overflow:hidden;
+  background:radial-gradient(130% 130% at 50% 50%,#1d1812 0,#110c08 58%,#0a0705 100%);will-change:transform}
+.opening__panel--top{top:0}
+.opening__panel--bottom{bottom:0}
+.opening__grain{position:absolute;inset:0;opacity:.05;pointer-events:none;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.opening.split .opening__panel--top{animation:gateUp 1.05s var(--ease-out) forwards}
+.opening.split .opening__panel--bottom{animation:gateDown 1.05s var(--ease-out) forwards}
 @keyframes gateUp{to{transform:translateY(-101%)}}
 @keyframes gateDown{to{transform:translateY(101%)}}
 
-.opening__center{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;color:var(--ink)}
-.opening.split .opening__center{animation:opCenterOut .5s var(--ease) forwards}
-@keyframes opCenterOut{to{opacity:0;transform:translateY(-12px)}}
+/* thin top progress */
+.opening__progress{position:absolute;top:0;left:0;right:0;height:2px;z-index:4;background:rgba(231,212,163,.12)}
+.opening__progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));animation:opProg 2s var(--ease) .2s forwards}
+@keyframes opProg{to{width:100%}}
 
-.opening__eyebrow{font-family:var(--mono);font-size:clamp(.62rem,1.6vw,.78rem);letter-spacing:.34em;text-transform:uppercase;color:var(--accent);opacity:0;animation:opFade .8s var(--ease) .15s forwards;margin-bottom:18px}
-.opening__name{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(3.4rem,13vw,8rem);line-height:1;letter-spacing:.06em;color:var(--ink);margin:0}
-.opening__rule{display:block;width:min(46vw,360px);height:1px;background:var(--accent);margin:22px auto 0;transform:scaleX(0);transform-origin:50% 50%;animation:opRule .9s var(--ease-out) .55s forwards}
-.opening__tag{font-family:var(--serif);font-weight:400;font-size:clamp(1rem,3vw,1.45rem);letter-spacing:.12em;color:var(--ink-soft);margin-top:22px}
+/* centre stack */
+.opening__center{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;color:#f3ecdc}
+.opening.split .opening__center{animation:opCenterOut .5s var(--ease) forwards}
+@keyframes opCenterOut{to{opacity:0;transform:translateY(-14px)}}
+
+.opening__eyebrow{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:clamp(.6rem,1.6vw,.74rem);letter-spacing:.32em;text-transform:uppercase;color:var(--accent-2);opacity:0;animation:opFade .8s var(--ease) .2s forwards;margin-bottom:20px}
+.opening__eline{display:block;width:0;height:1px;background:var(--accent);animation:opLine .7s var(--ease-out) .35s forwards}
+@keyframes opLine{to{width:clamp(18px,5vw,40px)}}
+
+.opening__reading{font-family:var(--serif);font-weight:400;letter-spacing:.5em;font-size:clamp(.8rem,2.6vw,1rem);color:var(--accent-2);margin:0 0 12px;padding-left:.5em}
+
+.opening__name{display:flex;justify-content:center;margin:0;font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(3.6rem,15vw,8.5rem);line-height:1;letter-spacing:.04em;color:#f6efe1}
+.op-ch{display:block;overflow:hidden;padding:0 .03em}
+.op-ch>span{display:block;transform:translateY(116%);animation:opRise .9s var(--ease-out) forwards}
+.op-ch:nth-child(1)>span{animation-delay:.5s}
+.op-ch:nth-child(2)>span{animation-delay:.58s}
+.op-ch:nth-child(3)>span{animation-delay:.66s}
+.op-ch:nth-child(4)>span{animation-delay:.74s}
+.op-ch:nth-child(5)>span{animation-delay:.82s}
+
+.opening__rule{display:block;width:0;height:1px;background:var(--accent);margin:20px auto 0;animation:opRule2 .9s var(--ease-out) 1s forwards}
+@keyframes opRule2{to{width:min(42vw,320px)}}
+
+.opening__tag{font-family:var(--serif);font-weight:300;font-size:clamp(1rem,3vw,1.4rem);letter-spacing:.14em;color:#e9e0d0;margin-top:20px}
 .op-mask{display:block;overflow:hidden}
-.op-mask>span{display:block;transform:translateY(115%);animation:opRise .95s var(--ease-out) forwards}
-.opening__name .op-mask>span{animation-delay:.3s}
-.opening__tag .op-mask>span{animation-delay:.66s}
+.op-mask>span{display:block;transform:translateY(115%);animation:opRise .9s var(--ease-out) forwards}
+.opening__reading .op-mask>span{animation-delay:.32s}
+.opening__tag .op-mask>span{animation-delay:1.18s}
 @keyframes opFade{to{opacity:1}}
 @keyframes opRise{to{transform:translateY(0)}}
-@keyframes opRule{to{transform:scaleX(1)}}
 
-.opening__skip{position:absolute;bottom:clamp(1.4rem,5vh,2.4rem);right:clamp(20px,5vw,2.4rem);z-index:3;background:transparent;border:1px solid var(--line);color:var(--ink);font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;padding:9px 18px;cursor:pointer;opacity:0;animation:opFade .8s ease 1s forwards;transition:background .3s,color .3s}
+.opening__skip{position:absolute;bottom:clamp(1.4rem,5vh,2.4rem);right:clamp(20px,5vw,2.4rem);z-index:5;background:transparent;border:1px solid rgba(231,212,163,.4);color:#f3ecdc;font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;padding:9px 18px;cursor:pointer;opacity:0;animation:opFade .8s ease 1.2s forwards;transition:background .3s,color .3s}
 .opening__skip em{font-style:normal;margin-left:4px}
-.opening__skip:hover{background:var(--ink);color:var(--paper)}
+.opening__skip:hover{background:#f3ecdc;color:#100c08}
 
 @media(prefers-reduced-motion:reduce){
   .opening__center,.opening__eyebrow,.opening__skip{opacity:1;animation:none}
-  .op-mask>span{transform:none;animation:none}
-  .opening__rule{transform:scaleX(1);animation:none}
+  .op-mask>span,.op-ch>span{transform:none;animation:none}
+  .opening__rule{width:min(42vw,320px);animation:none}
+  .opening__eline{width:clamp(18px,5vw,40px);animation:none}
+  .opening__progress i{width:100%;animation:none}
   .opening.split .opening__panel--top,.opening.split .opening__panel--bottom,.opening.split .opening__center{animation:none}
 }
 

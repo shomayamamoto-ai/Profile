@@ -38,12 +38,12 @@
     window.scrollTo(0, 0);
 
     // hold on the title card, then split the gate to reveal the hero
-    var splitAt = reduce ? 1400 : 2100;
+    var splitAt = reduce ? 1500 : 2500;
     var splitTimer = setTimeout(function () {
       if (!ended) opening.classList.add('split');
     }, splitAt);
-    var endTimer = setTimeout(endOpening, splitAt + 1050);
-    setTimeout(endOpening, 6000); // hard safety: never hang
+    var endTimer = setTimeout(endOpening, splitAt + 1150);
+    setTimeout(endOpening, 7000); // hard safety: never hang
 
     var skip = document.getElementById('openingSkip');
     if (skip) skip.addEventListener('click', function () {
