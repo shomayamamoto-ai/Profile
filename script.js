@@ -6,7 +6,9 @@
 
   /* ---------- Always start at the top (no scroll restoration) ---------- */
   if ('scrollRestoration' in history) { try { history.scrollRestoration = 'manual'; } catch (e) {} }
-  window.scrollTo(0, 0);
+  function toTop() { window.scrollTo(0, 0); }
+  toTop();
+  window.addEventListener('load', function () { toTop(); requestAnimationFrame(toTop); });
 
   /* ---------- Opening movie ---------- */
   var opening = document.getElementById('opening');
@@ -19,7 +21,8 @@
     ended = true;
     if (rafId) cancelAnimationFrame(rafId);
     document.body.classList.remove('is-loading');
-    window.scrollTo(0, 0);
+    toTop();
+    requestAnimationFrame(toTop);
     if (opening) opening.classList.add('done');
     revealHero();
     // fully remove from layout after fade
