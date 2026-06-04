@@ -154,5 +154,16 @@
     else if (e.key === 'ArrowRight') showLb(idx + 1);
   });
 
-  /* ---------- Copy email on contact mail click is native mailto; add copy fallback on long-press? keep simple ---------- */
+  /* ---------- Obfuscated email (assembled only on interaction) ---------- */
+  function buildMail(el) {
+    var m = el.getAttribute('data-m');
+    if (!m) return '';
+    try { return 'mailto:' + atob(m); } catch (err) { return ''; }
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.js-mail'), function (el) {
+    el.addEventListener('click', function (e) {
+      var m = buildMail(el);
+      if (m) { e.preventDefault(); window.location.href = m; }
+    });
+  });
 })();

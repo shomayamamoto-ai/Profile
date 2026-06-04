@@ -26,7 +26,7 @@ python3 -m http.server 8000
 
 ## 連絡先
 
-- Email: shoma.yamamoto@lumenium.net
+- Email: サイトの **Contact** セクションの「メールでご連絡」ボタンから（スパム対策のためアドレスはページ内に直接表示していません）
 - Instagram: [@showstagram.keio](https://www.instagram.com/showstagram.keio)
 - Agency: [AdvoVisions](https://advovisions.com/bcd31-home/)
 
