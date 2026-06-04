@@ -38,49 +38,32 @@
     document.body.classList.add('is-loading');
     window.scrollTo(0, 0);
 
-    var started = false, tcEl = document.getElementById('openTC'),
-        flashEl = document.getElementById('openFlash'), t0 = 0;
+    var fillEl = document.getElementById('ldFill');
+    var countEl = document.getElementById('ldCount');
+    var HOLD = 320, DUR = 2200, t0 = null;
 
-    function two(n) { return (n < 10 ? '0' : '') + n; }
     function tick(now) {
-      if (!t0) t0 = now;
-      var total = Math.floor((now - t0) / 1000 * 24); // 24fps timecode
-      var f = total % 24, s = Math.floor(total / 24) % 60, m = Math.floor(total / 1440) % 60;
-      if (tcEl) tcEl.textContent = '00:' + two(m) + ':' + two(s) + ':' + two(f);
-      rafId = requestAnimationFrame(tick);
+      if (ended) return;
+      if (t0 === null) { t0 = now; rafId = requestAnimationFrame(tick); return; }
+      var e = now - t0;
+      if (e < HOLD) { rafId = requestAnimationFrame(tick); return; }
+      var t = Math.min(1, (e - HOLD) / DUR);
+      var pct = Math.floor(t * 100);
+      if (fillEl) fillEl.style.width = pct + '%';
+      if (countEl) countEl.textContent = pct < 10 ? '0' + pct : '' + pct;
+      if (t < 1) { rafId = requestAnimationFrame(tick); }
+      else {
+        if (fillEl) fillEl.style.width = '100%';
+        if (countEl) countEl.textContent = '100';
+        setTimeout(endOpening, 360);
+      }
     }
-    function flash() {
-      if (!flashEl) return;
-      flashEl.classList.add('on');
-      setTimeout(function () { flashEl.classList.remove('on'); }, 70);
-    }
-    function play() {
-      if (started || ended) return;
-      started = true;
-      window.scrollTo(0, 0);
-      opening.classList.add('play');
-      rafId = requestAnimationFrame(tick);
-      setTimeout(flash, 1100);
-      setTimeout(flash, 2150);
-      setTimeout(endOpening, 3600); // total ~3.55s, then dissolve into the site
-    }
+    rafId = requestAnimationFrame(tick);
 
-    // Preload the montage frames, then play once they're ready (capped).
-    var srcs = ['assets/img/hero.webp', 'assets/img/stage.webp', 'assets/img/street.webp'];
-    var done = 0;
-    srcs.forEach(function (src) {
-      var im = new Image();
-      im.onload = im.onerror = function () { if (++done >= srcs.length) play(); };
-      im.src = src;
-    });
-    setTimeout(play, 1200);          // cap: begin even if images are slow
-    setTimeout(endOpening, 7600);    // hard safety: never hang
+    setTimeout(endOpening, 6000);   // hard safety: never hang
 
     var skip = document.getElementById('openingSkip');
     if (skip) skip.addEventListener('click', function () { endOpening(); });
-    opening.addEventListener('click', function (e) {
-      if (e.target === opening) endOpening();
-    });
   }
 
   /* ---------- Year ---------- */
