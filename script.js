@@ -4,16 +4,22 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var doc = document.documentElement;
 
+  /* ---------- Always start at the top (no scroll restoration) ---------- */
+  if ('scrollRestoration' in history) { try { history.scrollRestoration = 'manual'; } catch (e) {} }
+  window.scrollTo(0, 0);
+
   /* ---------- Opening movie ---------- */
   var opening = document.getElementById('opening');
   var heroEl = document.querySelector('.hero');
-  var ended = false;
+  var ended = false, rafId = 0;
 
   function revealHero() { if (heroEl) heroEl.classList.add('in-line'); }
   function endOpening() {
     if (ended) return;
     ended = true;
+    if (rafId) cancelAnimationFrame(rafId);
     document.body.classList.remove('is-loading');
+    window.scrollTo(0, 0);
     if (opening) opening.classList.add('done');
     revealHero();
     // fully remove from layout after fade
@@ -23,20 +29,19 @@
   if (!opening || reduce) {
     // skip the movie entirely
     document.body.classList.add('opening-off');
+    window.scrollTo(0, 0);
     revealHero();
   } else {
     document.body.classList.add('is-loading');
-    // preload montage images so frames are ready
-    ['assets/img/work1.webp', 'assets/img/work2.webp'].forEach(function (src) {
-      var im = new Image(); im.src = src;
-    });
-    var started = false, rafId = 0, tcEl = document.getElementById('openTC'),
+    window.scrollTo(0, 0);
+
+    var started = false, tcEl = document.getElementById('openTC'),
         flashEl = document.getElementById('openFlash'), t0 = 0;
 
     function two(n) { return (n < 10 ? '0' : '') + n; }
     function tick(now) {
       if (!t0) t0 = now;
-      var ms = now - t0, total = Math.floor(ms / 1000 * 24); // 24fps
+      var total = Math.floor((now - t0) / 1000 * 24); // 24fps timecode
       var f = total % 24, s = Math.floor(total / 24) % 60, m = Math.floor(total / 1440) % 60;
       if (tcEl) tcEl.textContent = '00:' + two(m) + ':' + two(s) + ':' + two(f);
       rafId = requestAnimationFrame(tick);
@@ -47,24 +52,26 @@
       setTimeout(function () { flashEl.classList.remove('on'); }, 70);
     }
     function play() {
-      if (started) return;
+      if (started || ended) return;
       started = true;
+      window.scrollTo(0, 0);
       opening.classList.add('play');
       rafId = requestAnimationFrame(tick);
-      // splice flashes synced to the frame cuts
       setTimeout(flash, 1100);
       setTimeout(flash, 2150);
-      // total timeline ~3.55s, then dissolve into the site
-      setTimeout(endOpening, 3600);
+      setTimeout(endOpening, 3600); // total ~3.55s, then dissolve into the site
     }
-    var _end = endOpening;
-    endOpening = function () { if (rafId) cancelAnimationFrame(rafId); _end(); };
 
-    // start after load, or after a short cap so we never stall
-    if (document.readyState === 'complete') setTimeout(play, 200);
-    else window.addEventListener('load', function () { setTimeout(play, 150); });
-    setTimeout(play, 1600);           // cap: begin even if load is slow
-    setTimeout(function () { endOpening(); }, 7600); // hard safety: never hang
+    // Preload the montage frames, then play once they're ready (capped).
+    var srcs = ['assets/img/hero.webp', 'assets/img/work1.webp', 'assets/img/work2.webp'];
+    var done = 0;
+    srcs.forEach(function (src) {
+      var im = new Image();
+      im.onload = im.onerror = function () { if (++done >= srcs.length) play(); };
+      im.src = src;
+    });
+    setTimeout(play, 1200);          // cap: begin even if images are slow
+    setTimeout(endOpening, 7600);    // hard safety: never hang
 
     var skip = document.getElementById('openingSkip');
     if (skip) skip.addEventListener('click', function () { endOpening(); });

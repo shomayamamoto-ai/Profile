@@ -285,13 +285,22 @@ body.menu-open .nav__burger span:nth-child(2){bottom:9px;transform:rotate(-45deg
 }
 .hero__media{position:absolute;inset:0;z-index:-2;will-change:transform}
 .hero__media img{
-  width:100%;height:100%;object-fit:cover;object-position:50% 26%;
+  width:100%;height:100%;object-fit:cover;object-position:50% 24%;
   animation:heroZoom 16s var(--ease) forwards;
 }
 @keyframes heroZoom{from{transform:scale(1.14)}to{transform:scale(1)}}
+/* On wider screens, shift the portrait to the right so the title doesn't sit on the face */
+@media(min-width:768px){
+  .hero__media{right:auto;width:130%}
+}
+@media(min-width:1200px){
+  .hero__media{width:124%}
+}
 .hero__media::after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(15,11,8,.5) 0%,rgba(15,11,8,.06) 30%,rgba(15,11,8,.22) 60%,rgba(15,11,8,.85) 100%);
+  background:
+    linear-gradient(90deg, rgba(11,8,5,.66) 0%, rgba(11,8,5,.28) 32%, rgba(11,8,5,0) 56%),
+    linear-gradient(180deg,rgba(15,11,8,.42) 0%,rgba(15,11,8,.04) 30%,rgba(15,11,8,.2) 60%,rgba(15,11,8,.85) 100%);
 }
 .hero__media-grain{
   position:absolute;inset:0;opacity:.06;pointer-events:none;
