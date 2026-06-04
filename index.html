@@ -70,22 +70,39 @@
     <div class="opening__frame opening__frame--3"></div>
     <div class="opening__grain"></div>
     <div class="opening__veil"></div>
+    <div class="opening__vignette"></div>
   </div>
+
   <div class="opening__bar opening__bar--top"></div>
   <div class="opening__bar opening__bar--bottom"></div>
+  <div class="opening__flash" id="openFlash"></div>
 
-  <div class="opening__titles">
-    <p class="opening__eyebrow"><span>Model &nbsp;/&nbsp; Actor &nbsp;—&nbsp; Kanto, Japan</span></p>
-    <h1 class="opening__name"><span class="line"><span>SHOMA</span></span></h1>
-    <p class="opening__tagline"><span class="line"><span>画面に残る、人になる。</span></span></p>
+  <div class="opening__hud">
+    <span class="opening__bracket opening__bracket--tl"></span>
+    <span class="opening__bracket opening__bracket--tr"></span>
+    <span class="opening__bracket opening__bracket--bl"></span>
+    <span class="opening__bracket opening__bracket--br"></span>
+    <span class="opening__rec"><i></i>REC</span>
+    <span class="opening__tc" id="openTC">00:00:00:00</span>
   </div>
 
-  <div class="opening__loading"><i></i></div>
+  <div class="opening__titles">
+    <p class="opening__act opening__act--1 opening__eyebrow"><span>Model &nbsp;/&nbsp; Actor &nbsp;—&nbsp; Kanto, Japan</span></p>
+    <p class="opening__act opening__act--2 opening__credits"><span>CM &nbsp;・&nbsp; MV &nbsp;・&nbsp; Still &nbsp;・&nbsp; Runway</span></p>
+    <div class="opening__act opening__act--3">
+      <p class="opening__sub"><span class="line"><span>しょーま</span></span></p>
+      <h1 class="opening__name"><span class="line"><span>SHOMA</span></span></h1>
+      <p class="opening__tagline"><span class="line"><span>画面に残る、人になる。</span></span></p>
+    </div>
+  </div>
+
+  <div class="opening__progress"><i></i></div>
   <button class="opening__skip" id="openingSkip" type="button">Skip <em>↦</em></button>
 </div>
 
 <!-- ░░ Custom cursor (desktop) ░░ -->
 <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
 <!-- ░░ Progress bar ░░ -->
 <div class="scroll-progress" id="progress"></div>
@@ -104,12 +121,27 @@
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#works"><em>01</em> Works</a>
-  <a href="#whatido"><em>02</em> What I do</a>
-  <a href="#profile"><em>03</em> Profile</a>
-  <a href="#booking"><em>04</em> Booking</a>
-  <a href="#contact"><em>05</em> Contact</a>
+  <p class="mobile-menu__eyebrow">Menu</p>
+  <nav class="mobile-menu__links">
+    <a href="#top"><em>00</em> Top</a>
+    <a href="#works"><em>01</em> Works</a>
+    <a href="#whatido"><em>02</em> What I do</a>
+    <a href="#profile"><em>03</em> Profile</a>
+    <a href="#booking"><em>04</em> Booking</a>
+    <a href="#contact"><em>05</em> Contact</a>
+  </nav>
+  <div class="mobile-menu__foot">
+    <a href="https://www.instagram.com/showstagram.keio" target="_blank" rel="noopener">Instagram</a>
+    <a href="#" class="js-mail" data-m="c2hvbWEueWFtYW1vdG9AbHVtZW5pdW0ubmV0">Email</a>
+  </div>
 </div>
+
+<!-- ░░ Breadcrumb (scroll-spy) ░░ -->
+<nav class="crumbs" id="crumbs" aria-label="現在地">
+  <a href="#top" data-cursor="Top">Home</a>
+  <span class="crumbs__sep">›</span>
+  <span class="crumbs__cur" id="crumbCur">Top</span>
+</nav>
 
 <!-- ░░ Hero ░░ -->
 <section class="hero" id="top">

@@ -34,22 +34,44 @@
     ['assets/img/work1.webp', 'assets/img/work2.webp'].forEach(function (src) {
       var im = new Image(); im.src = src;
     });
-    var started = false;
+    var started = false, rafId = 0, tcEl = document.getElementById('openTC'),
+        flashEl = document.getElementById('openFlash'), t0 = 0;
+
+    function two(n) { return (n < 10 ? '0' : '') + n; }
+    function tick(now) {
+      if (!t0) t0 = now;
+      var ms = now - t0, total = Math.floor(ms / 1000 * 24); // 24fps
+      var f = total % 24, s = Math.floor(total / 24) % 60, m = Math.floor(total / 1440) % 60;
+      if (tcEl) tcEl.textContent = '00:' + two(m) + ':' + two(s) + ':' + two(f);
+      rafId = requestAnimationFrame(tick);
+    }
+    function flash() {
+      if (!flashEl) return;
+      flashEl.classList.add('on');
+      setTimeout(function () { flashEl.classList.remove('on'); }, 70);
+    }
     function play() {
       if (started) return;
       started = true;
       opening.classList.add('play');
-      // total timeline ~3.8s, then fade out
-      setTimeout(endOpening, 3800);
+      rafId = requestAnimationFrame(tick);
+      // splice flashes synced to the frame cuts
+      setTimeout(flash, 1550);
+      setTimeout(flash, 2950);
+      // total timeline ~4.6s, then dissolve into the site
+      setTimeout(endOpening, 4650);
     }
+    var _end = endOpening;
+    endOpening = function () { if (rafId) cancelAnimationFrame(rafId); _end(); };
+
     // start after load, or after a short cap so we never stall
     if (document.readyState === 'complete') setTimeout(play, 200);
     else window.addEventListener('load', function () { setTimeout(play, 150); });
     setTimeout(play, 1600);           // cap: begin even if load is slow
-    setTimeout(endOpening, 6500);     // hard safety: never hang
+    setTimeout(function () { endOpening(); }, 7600); // hard safety: never hang
 
     var skip = document.getElementById('openingSkip');
-    if (skip) skip.addEventListener('click', endOpening);
+    if (skip) skip.addEventListener('click', function () { endOpening(); });
     opening.addEventListener('click', function (e) {
       if (e.target === opening) endOpening();
     });
@@ -59,16 +81,34 @@
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
-  /* ---------- Scroll progress + nav + fab ---------- */
+  /* ---------- Scroll progress + nav + fab + breadcrumb ---------- */
   var progress = document.getElementById('progress');
   var nav = document.getElementById('nav');
   var fab = document.getElementById('fab');
+  var crumbs = document.getElementById('crumbs');
+  var crumbCur = document.getElementById('crumbCur');
+  var sections = [
+    ['top', 'Top'], ['works', 'Works'], ['whatido', 'What I do'],
+    ['profile', 'Profile'], ['booking', 'Booking'], ['contact', 'Contact']
+  ];
+  var lastCrumb = '';
+  function updateCrumb(st) {
+    if (!crumbCur) return;
+    var mark = st + window.innerHeight * 0.42, cur = sections[0][1];
+    for (var i = 0; i < sections.length; i++) {
+      var el = document.getElementById(sections[i][0]);
+      if (el && el.offsetTop <= mark) cur = sections[i][1];
+    }
+    if (cur !== lastCrumb) { lastCrumb = cur; crumbCur.textContent = cur; }
+  }
   function onScroll() {
     var st = window.scrollY || doc.scrollTop;
     var h = doc.scrollHeight - window.innerHeight;
     if (progress) progress.style.width = (h > 0 ? (st / h) * 100 : 0) + '%';
     if (nav) nav.classList.toggle('is-scrolled', st > 40);
     if (fab) fab.classList.toggle('show', st > window.innerHeight * 0.9);
+    if (crumbs) crumbs.classList.toggle('show', st > 80);
+    updateCrumb(st);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -115,15 +155,24 @@
 
   /* ---------- Custom cursor ---------- */
   var cursor = document.getElementById('cursor');
+  var cursorDot = document.getElementById('cursorDot');
   var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
   if (cursor && fine && !reduce) {
+    document.body.classList.add('cursor-on');
     var label = cursor.querySelector('.cursor__label');
     var cx = window.innerWidth / 2, cy = window.innerHeight / 2, tx = cx, ty = cy;
     document.addEventListener('mousemove', function (e) {
       tx = e.clientX; ty = e.clientY;
       cursor.classList.add('visible');
+      if (cursorDot) {
+        cursorDot.classList.add('visible');
+        cursorDot.style.transform = 'translate(' + tx + 'px,' + ty + 'px) translate(-50%,-50%)';
+      }
     });
-    document.addEventListener('mouseleave', function () { cursor.classList.remove('visible'); });
+    document.addEventListener('mouseleave', function () {
+      cursor.classList.remove('visible');
+      if (cursorDot) cursorDot.classList.remove('visible');
+    });
     (function loop() {
       cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
       cursor.style.transform = 'translate(' + cx + 'px,' + cy + 'px) translate(-50%,-50%)';
