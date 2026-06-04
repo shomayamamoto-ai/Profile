@@ -183,7 +183,10 @@
     document.body.style.overflow = '';
   }
   shots.forEach(function (s, i) {
-    s.addEventListener('click', function () { openLb(i); });
+    s.addEventListener('click', function (e) {
+      if (e.target.closest('a')) return; // let the photographer credit link work
+      openLb(i);
+    });
   });
   var bind = function (id, fn) { var el = document.getElementById(id); if (el) el.addEventListener('click', fn); };
   bind('lbClose', closeLb);

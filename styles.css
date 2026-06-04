@@ -52,7 +52,7 @@ ul,ol{list-style:none}
 .hero :focus-visible,.intro :focus-visible,.contact :focus-visible,.english :focus-visible,.role :focus-visible,.lightbox :focus-visible{outline-color:var(--paper)}
 
 /* picture wrappers fill their figure/media box */
-.hero__media picture,.works__shot picture{display:block;width:100%;height:100%}
+.hero__media picture,.works__frame picture{display:block;width:100%;height:100%}
 
 /* ===========================================================
    OPENING — editorial gate reveal (original to SHOMA)
@@ -309,20 +309,24 @@ body.menu-open .nav__burger span:nth-child(2){bottom:9px;transform:rotate(-45deg
 
 /* ── Works ── */
 .works__gallery{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.5vw,28px);margin-bottom:clamp(48px,7vw,84px)}
-.works__shot{position:relative;overflow:hidden;border-radius:4px;background:var(--paper-2);box-shadow:var(--shadow);cursor:pointer}
-.works__shot img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;transition:transform 1.1s var(--ease),filter .6s;filter:saturate(.96)}
-.works__shot:hover img{transform:scale(1.06);filter:saturate(1.05)}
-.works__shot figcaption{
+.works__shot{position:relative;cursor:pointer}
+.works__frame{position:relative;display:block;overflow:hidden;border-radius:4px;background:var(--paper-2);box-shadow:var(--shadow)}
+.works__frame img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;transition:transform 1.1s var(--ease),filter .6s;filter:saturate(.96)}
+.works__shot:hover .works__frame img{transform:scale(1.06);filter:saturate(1.05)}
+.works__cap{
   position:absolute;left:0;right:0;bottom:0;padding:26px 22px 18px;
   font-family:var(--mono);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);
   background:linear-gradient(180deg,transparent,rgba(15,11,8,.7));
   display:flex;align-items:center;gap:10px;
   transform:translateY(8px);opacity:0;transition:.5s var(--ease);
 }
-.works__shot figcaption span{color:var(--accent-2)}
-.works__shot:hover figcaption{transform:none;opacity:1}
-.works__shot::after{content:"⤢";position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(243,239,232,.9);color:var(--ink);font-size:1.1rem;opacity:0;transform:scale(.7);transition:.4s var(--ease)}
-.works__shot:hover::after{opacity:1;transform:scale(1)}
+.works__cap span{color:var(--accent-2)}
+.works__shot:hover .works__cap{transform:none;opacity:1}
+.works__frame::after{content:"⤢";position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(243,239,232,.9);color:var(--ink);font-size:1.1rem;opacity:0;transform:scale(.7);transition:.4s var(--ease)}
+.works__shot:hover .works__frame::after{opacity:1;transform:scale(1)}
+.works__by{display:inline-flex;align-items:center;gap:7px;margin-top:11px;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);transition:color .3s}
+.works__by .works__by-k{color:var(--accent);text-transform:uppercase;letter-spacing:.14em}
+.works__by:hover{color:var(--accent)}
 .works__shot:last-child{margin-top:clamp(28px,5vw,72px)}
 @media(max-width:640px){.works__shot:last-child{margin-top:0}}
 
@@ -541,7 +545,7 @@ body.menu-open .nav__burger span:nth-child(2){bottom:9px;transform:rotate(-45deg
 .works__gallery{display:block;column-count:2;column-gap:clamp(14px,2.6vw,30px)}
 .works__shot{break-inside:avoid;width:100%;margin:0 0 clamp(14px,2.6vw,30px);display:block}
 .works__shot:first-child,.works__shot:last-child{margin-top:0}
-.works__shot img{aspect-ratio:auto;height:auto}
+.works__frame img{aspect-ratio:auto;height:auto}
 @media(max-width:640px){.works__gallery{column-count:1}}
 .credit:hover{border-color:var(--accent)}
 
@@ -602,7 +606,7 @@ body.menu-open .nav__burger span:nth-child(2){bottom:9px;transform:rotate(-45deg
 
 /* cards & surfaces: crisp hairlines, no rounded */
 .credit,.field,.booking__step,.profile__wrap{border-radius:0}
-.works__shot{border-radius:0}
+.works__frame{border-radius:0}
 .booking__no{border-radius:50%}
 
 /* ---- Profile as a model comp card ---- */
@@ -724,3 +728,7 @@ body{font-weight:400}
 /* mobile-only line breaks */
 .br-sp{display:none}
 @media (max-width:600px){ .br-sp{display:block} }
+
+/* comp spec inline link (e.g. Agency) */
+.comp__specs dd a{border-bottom:1px solid var(--accent);transition:color .3s}
+.comp__specs dd a:hover{color:var(--accent)}
