@@ -223,7 +223,7 @@ body.menu-open .nav__burger span:nth-child(2){bottom:9px;transform:rotate(-45deg
 }
 @media(max-width:760px){.hero__name{display:none}}
 
-.hero__scroll{position:absolute;right:clamp(20px,5vw,64px);bottom:clamp(60px,9vh,110px);display:flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;opacity:.85;z-index:2}
+.hero__scroll{position:absolute;left:50%;transform:translateX(-50%);bottom:clamp(28px,5vh,56px);display:flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;opacity:.85;z-index:3}
 .hero__scroll i{width:1px;height:46px;background:var(--paper);position:relative;overflow:hidden}
 .hero__scroll i::after{content:"";position:absolute;top:-46px;left:0;width:100%;height:46px;background:var(--accent);animation:scrollLine 2.2s var(--ease) infinite}
 @keyframes scrollLine{0%{transform:translateY(0)}100%{transform:translateY(92px)}}
