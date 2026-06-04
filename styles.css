@@ -658,5 +658,28 @@ body.menu-open .nav__burger span:nth-child(2){bottom:9px;transform:rotate(-45deg
 .works__shot{border-radius:0}
 .booking__no{border-radius:50%}
 
+/* ---- Profile as a model comp card ---- */
+.comp{display:grid;grid-template-columns:.82fr 1.18fr;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow);overflow:hidden}
+.comp__photo{margin:0;overflow:hidden;background:var(--paper-2)}
+.comp__photo img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5;filter:saturate(.97);transition:transform 1.1s var(--ease)}
+.comp:hover .comp__photo img{transform:scale(1.04)}
+.comp__body{padding:clamp(28px,4vw,54px);display:flex;flex-direction:column;justify-content:center;gap:clamp(22px,3vw,34px)}
+.comp__role{font-family:var(--mono);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.comp__name{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(3rem,8vw,5.2rem);line-height:.92;letter-spacing:.04em;margin-top:6px}
+.comp__reading{font-family:var(--serif);color:var(--ink-soft);letter-spacing:.34em;margin-top:8px;padding-left:.34em}
+.comp__specs{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.comp__specs>div{padding:15px 2px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:5px}
+.comp__specs>div:nth-child(odd){padding-right:20px;border-right:1px solid var(--line);padding-left:0}
+.comp__specs>div:nth-child(even){padding-left:20px}
+.comp__specs dt{font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.comp__specs dd{font-size:1rem;font-weight:400}
+.comp__links{display:flex;gap:26px;flex-wrap:wrap}
+.comp__links a{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;border-bottom:1px solid var(--accent);padding-bottom:3px;transition:color .3s}
+.comp__links a:hover{color:var(--accent)}
+@media(max-width:760px){
+  .comp{grid-template-columns:1fr}
+  .comp__photo img{aspect-ratio:3/4}
+}
+
 /* selection */
 ::selection{background:var(--accent);color:#fff}
