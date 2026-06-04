@@ -11,8 +11,18 @@ CM・MV・スチール・ランウェイの出演実績と、出演・撮影の�
 | --- | --- |
 | `index.html` | ページ本体（Hero / Works / What I do / Profile / Booking / Contact） |
 | `styles.css` | デザイン（エディトリアル / 和欧混植・スクロール演出） |
-| `script.js` | スクロール進捗・出現アニメ・モバイルメニュー・パララックス |
-| `assets/img/` | ポートレート・作品カット |
+| `script.js` | スクロール進捗・出現アニメ・モバイルメニュー・パララックス・ライトボックス・メール難読化 |
+| `assets/img/` | ポートレート・作品カット（WebP + JPEG フォールバック / レスポンシブ） |
+| `manifest.webmanifest` | PWA（ホーム画面追加）対応 |
+| `robots.txt` / `sitemap.xml` | クローラ向け |
+| `.github/workflows/pages.yml` | GitHub Pages 自動デプロイ |
+
+## 主な工夫
+
+- **パフォーマンス**: WebP 配信 + `srcset` レスポンシブ画像 + 画像サイズ指定で CLS 抑制、ヒーロー画像の preload
+- **SEO**: 構造化データ（JSON-LD / Person）、canonical、OGP / Twitter Card、sitemap・robots
+- **アクセシビリティ**: スキップリンク、フォーカス可視化、`prefers-reduced-motion` 対応
+- **プライバシー**: メールアドレスは base64 で埋め込み、クリック時のみ復号（スクレイピング対策）
 
 ## ローカルで見る
 

@@ -1,0 +1,14 @@
+{
+  "name": "しょーま｜SHOMA — Model / Actor",
+  "short_name": "SHOMA",
+  "description": "関東を拠点に活動するモデル / 俳優。CM・MV・スチール・ランウェイ。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#15110d",
+  "theme_color": "#15110d",
+  "lang": "ja",
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
