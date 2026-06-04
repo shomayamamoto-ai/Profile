@@ -632,3 +632,93 @@ body.menu-open .nav__burger span:nth-child(2){bottom:9px;transform:rotate(-45deg
 
 /* selection */
 ::selection{background:var(--accent);color:#fff}
+
+/* ===========================================================
+   A11Y / SR-ONLY
+   =========================================================== */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ===========================================================
+   CRISP TYPE — sharper, higher-contrast rendering
+   =========================================================== */
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{font-weight:400}
+.hero__title{font-weight:500;text-shadow:0 1px 28px rgba(10,8,5,.28)}
+.hero__lede{color:#fbf7f0;text-shadow:0 1px 18px rgba(10,8,5,.35)}
+.hero__eyebrow{color:#fff;text-shadow:0 1px 14px rgba(10,8,5,.4)}
+.section__title{font-weight:600}
+.section__sub{color:#5a554c}
+.field h3,.strength h3,.booking__step h3{font-weight:600}
+.credit ul li,.field p,.strength p,.booking__step p,.role>p{color:#534e45}
+.intro__v,.profile__specs dd,.comp__specs dd{color:var(--ink)}
+
+/* ===========================================================
+   MOBILE — dedicated, touch-first UI (<= 600px)
+   =========================================================== */
+@media (max-width:600px){
+  body{font-size:15.5px;line-height:1.85}
+
+  /* nav a touch bigger */
+  .nav{padding:18px 20px}
+  .nav__burger{width:34px;height:22px}
+
+  /* hero tuned for phones */
+  .hero{padding:0 22px calc(108px + env(safe-area-inset-bottom))}
+  .hero__inner{max-width:100%}
+  .hero__title{font-size:clamp(3rem,16vw,4.4rem);line-height:1.04}
+  .hero__lede{font-size:1rem;max-width:100%}
+  .hero__tags{gap:8px}
+  .hero__tags span{font-size:.74rem;padding:6px 13px}
+  .hero__actions{flex-direction:column;align-items:stretch;gap:10px;width:100%}
+  .hero__actions .btn{width:100%;justify-content:center;padding:16px 22px}
+  .hero__name{display:none}
+  .hero__scroll{display:none}
+
+  /* sections: comfortable rhythm */
+  .section{padding:62px 22px;scroll-margin-top:64px}
+  .section__head{margin-bottom:34px}
+  .section__title{font-size:clamp(2.1rem,11vw,2.7rem)}
+  .section + .section{border-top:1px solid var(--line)}
+
+  /* stacks */
+  .works__gallery{grid-template-columns:1fr;gap:14px}
+  .works__shot:last-child{margin-top:0}
+  .works__credits{grid-template-columns:1fr;gap:16px}
+  .fields__row,.whatido__cols,.strengths__row,.booking__steps{grid-template-columns:1fr;gap:14px}
+  .comp{grid-template-columns:1fr}
+  .comp__specs{grid-template-columns:1fr 1fr}
+  .contact__channels{grid-template-columns:1fr}
+
+  /* fullscreen menu: large tap targets */
+  .mobile-menu__links a{font-size:clamp(2.1rem,9vw,2.6rem);padding:6px 0}
+  .mobile-menu__foot a{font-size:.85rem;padding:6px 0}
+
+  /* contact heading scale */
+  .contact__title{font-size:clamp(2.4rem,11vw,3.2rem)}
+  .english__body{font-size:clamp(1.2rem,5.4vw,1.6rem)}
+
+  /* back-to-top FAB would clash with the bottom bar */
+  .fab{display:none}
+  /* keep footer clear of the fixed bar */
+  .footer{padding-bottom:calc(96px + env(safe-area-inset-bottom));text-align:center;justify-content:center}
+
+  /* show the sticky mobile contact bar */
+  .mbar{display:grid}
+}
+
+/* sticky bottom contact bar — phones only */
+.mbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:120;display:none;
+  grid-template-columns:1fr 1fr;gap:0;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom);
+  box-shadow:0 -10px 30px -24px rgba(28,24,18,.5);
+}
+.mbar__btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:56px;font-family:var(--mono);font-size:.86rem;letter-spacing:.1em;
+  color:var(--ink);background:transparent;border:0;cursor:pointer;
+}
+.mbar__btn--mail{background:var(--ink);color:#fff}
+.mbar__btn + .mbar__btn{border-left:1px solid var(--line)}
