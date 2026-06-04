@@ -770,3 +770,12 @@ body{font-weight:400}
   .hero__title{font-size:clamp(2.7rem,13.5vw,4rem);text-shadow:0 1px 28px rgba(8,6,4,.6)}
   .hero__lede{text-shadow:0 1px 20px rgba(8,6,4,.62)}
 }
+
+/* ===========================================================
+   Replace emoji markers with a refined gold rule (editorial)
+   =========================================================== */
+.field__emoji,.credit__icon{font-size:0!important;line-height:0;display:block;margin-bottom:18px}
+.field__emoji::before,.credit__icon::before{content:"";display:block;width:32px;height:2px;background:var(--accent)}
+.role__emoji{font-size:0!important;line-height:0;display:flex;align-items:center}
+.role__emoji::before{content:"";display:block;width:30px;height:2px;background:currentColor;opacity:.85}
+.strength__emoji{display:none!important}
