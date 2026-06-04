@@ -3,20 +3,21 @@
    =========================================================== */
 
 :root{
-  --ink:#15110d;
-  --ink-soft:#4a443d;
-  --paper:#f3efe8;
-  --paper-2:#e9e3d8;
-  --line:#d8d0c2;
-  --accent:#b5462e;
-  --accent-2:#9a7b4f;
-  --white:#fffdf9;
-  --shadow:0 24px 60px -30px rgba(30,22,14,.45);
-  --shadow-lg:0 40px 90px -40px rgba(30,22,14,.6);
-  --serif:"Noto Serif JP",serif;
+  --ink:#1b1916;          /* near-black, warm */
+  --ink-soft:#6f6a62;
+  --paper:#ffffff;        /* white base */
+  --paper-2:#f6f4f0;      /* faint warm surface */
+  --paper-3:#efebe4;
+  --line:#e7e3db;         /* hairline */
+  --accent:#9a7b4f;       /* muted gold */
+  --accent-2:#b8a079;
+  --white:#ffffff;
+  --shadow:0 30px 70px -45px rgba(28,24,18,.28);
+  --shadow-lg:0 50px 110px -55px rgba(28,24,18,.34);
+  --serif:"Shippori Mincho",serif;
   --sans:"Noto Sans JP",sans-serif;
   --display:"Cormorant Garamond",serif;
-  --mono:"Outfit",sans-serif;
+  --mono:"Jost",sans-serif;
   --ease:cubic-bezier(.16,.84,.34,1);
   --ease-out:cubic-bezier(.22,1,.36,1);
 }
@@ -562,3 +563,100 @@ body.menu-open .nav__burger span:nth-child(2){bottom:9px;transform:rotate(-45deg
   .nav__links{display:none}
   .nav__burger{display:block}
 }
+
+/* ===========================================================
+   WHITE EDITORIAL THEME — light, minimal, designer
+   =========================================================== */
+
+/* Mixed Latin+JP display headings: Cormorant for Latin, Shippori for JP */
+.section__title,.contact__title{font-family:"Cormorant Garamond","Shippori Mincho",serif;font-weight:500}
+.section__title{letter-spacing:.005em}
+
+/* Section rhythm: thin top hairline to separate */
+.section{position:relative}
+.section + .section{border-top:1px solid var(--line)}
+.section__num{padding-left:0}
+.section__num::before{display:none}
+.section__num{display:inline-flex;align-items:center;gap:10px}
+.section__num::after{content:"";display:inline-block;width:30px;height:1px;background:var(--accent);vertical-align:middle}
+
+/* Buttons → minimal hairline */
+.btn{border-radius:0;padding:16px 30px;font-weight:400}
+.btn--solid{background:var(--ink);color:#fff}
+.btn--solid:hover{background:var(--accent)}
+.btn--ghost{border:1px solid var(--ink)}
+
+/* ---- Intro strip (was dark) ---- */
+.intro{background:var(--paper);color:var(--ink)}
+.intro__grid{padding-top:clamp(44px,6vw,72px)}
+.intro__cell{border-left:1px solid var(--line)}
+.intro__k{color:var(--accent)}
+.intro__v{color:var(--ink)}
+.intro__v a{color:var(--ink);border-color:var(--accent)}
+.intro__v a:hover{color:var(--accent)}
+
+/* ---- Works ---- */
+.credit:hover{border-color:var(--accent)}
+
+/* ---- What I do (was dark gradients) ---- */
+.role{color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.role--model{background:linear-gradient(160deg,#f4f6f8,#edf1f4)}
+.role--actor{background:linear-gradient(160deg,#f7f4f6,#f0ecef)}
+.role::after{display:none}
+.role:hover{box-shadow:var(--shadow);border-color:var(--accent)}
+.role h3{color:var(--ink)}
+.role>p{color:var(--ink-soft);opacity:1}
+.role__list li{border-color:var(--line);color:var(--ink-soft)}
+.role__list li:hover{background:#fff;border-color:var(--accent);color:var(--ink)}
+
+/* ---- Strengths ---- */
+.strength{border-top:1px solid var(--ink)}
+.strength:hover{border-top-color:var(--accent)}
+
+/* ---- English (was dark) ---- */
+.english__card{background:var(--paper-2);color:var(--ink);box-shadow:none;border:1px solid var(--line)}
+.english__card::before{display:none}
+.english__label{color:var(--accent)}
+.english__body{color:var(--ink)}
+.english__links a{color:var(--ink);border-color:var(--accent)}
+.english__links a:hover{color:var(--accent)}
+
+/* ---- Contact (was dark) ---- */
+.contact{background:var(--paper);color:var(--ink)}
+.contact::before{display:none}
+.contact__eyebrow{color:var(--accent)}
+.contact__title{color:var(--ink)}
+.contact__mail{color:var(--ink);border-color:var(--line)}
+.contact__mail:hover{color:var(--accent);border-color:var(--accent)}
+.contact__mail-ico{color:var(--accent)}
+.chan{border:1px solid var(--line);border-radius:0}
+.chan:hover{background:var(--paper-2);border-color:var(--accent)}
+.chan__k{color:var(--accent)}
+.chan__v{color:var(--ink)}
+.chan__arrow{color:var(--ink-soft)}
+.contact__social a{color:var(--ink-soft)}
+.contact__social a:hover{color:var(--ink);border-color:var(--accent)}
+
+/* ---- Footer (was dark) ---- */
+.footer{background:var(--paper);color:var(--ink);border-top:1px solid var(--line)}
+.footer__brand{color:var(--ink)}
+.footer__copy{color:var(--ink-soft)}
+.footer__top{color:var(--ink-soft)}
+.footer__top:hover{color:var(--accent)}
+
+/* ---- Fullscreen menu (was dark) ---- */
+.mobile-menu{background:var(--paper)}
+.mobile-menu__eyebrow{color:var(--accent)}
+.mobile-menu__links a{color:var(--ink)}
+.mobile-menu__links a:hover{color:var(--accent)}
+.mobile-menu__links a em{color:var(--accent)}
+.mobile-menu__foot a{color:var(--ink);border-color:var(--accent)}
+.mobile-menu__foot a:hover{color:var(--accent)}
+
+/* cards & surfaces: crisp hairlines, no rounded */
+.credit,.field,.booking__step,.profile__wrap{border-radius:0}
+.works__shot{border-radius:0}
+.booking__no{border-radius:50%}
+
+/* selection */
+::selection{background:var(--accent);color:#fff}
