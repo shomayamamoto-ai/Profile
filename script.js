@@ -37,32 +37,20 @@
     document.body.classList.add('is-loading');
     window.scrollTo(0, 0);
 
-    var fillEl = document.getElementById('ldFill');
-    var countEl = document.getElementById('ldCount');
-    var HOLD = 320, DUR = 2200, t0 = null;
-
-    function tick(now) {
-      if (ended) return;
-      if (t0 === null) { t0 = now; rafId = requestAnimationFrame(tick); return; }
-      var e = now - t0;
-      if (e < HOLD) { rafId = requestAnimationFrame(tick); return; }
-      var t = Math.min(1, (e - HOLD) / DUR);
-      var pct = Math.floor(t * 100);
-      if (fillEl) fillEl.style.width = pct + '%';
-      if (countEl) countEl.textContent = pct < 10 ? '0' + pct : '' + pct;
-      if (t < 1) { rafId = requestAnimationFrame(tick); }
-      else {
-        if (fillEl) fillEl.style.width = '100%';
-        if (countEl) countEl.textContent = '100';
-        setTimeout(endOpening, 360);
-      }
-    }
-    rafId = requestAnimationFrame(tick);
-
-    setTimeout(endOpening, 6000);   // hard safety: never hang
+    // hold on the title card, then split the gate to reveal the hero
+    var splitAt = reduce ? 1400 : 2100;
+    var splitTimer = setTimeout(function () {
+      if (!ended) opening.classList.add('split');
+    }, splitAt);
+    var endTimer = setTimeout(endOpening, splitAt + 1050);
+    setTimeout(endOpening, 6000); // hard safety: never hang
 
     var skip = document.getElementById('openingSkip');
-    if (skip) skip.addEventListener('click', function () { endOpening(); });
+    if (skip) skip.addEventListener('click', function () {
+      clearTimeout(splitTimer); clearTimeout(endTimer);
+      opening.classList.add('split');
+      setTimeout(endOpening, 360);
+    });
   }
 
   /* ---------- Year ---------- */

@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preload" as="image" href="assets/img/hero.webp" type="image/webp" />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=20260604l" />
+<link rel="stylesheet" href="styles.css?v=20260604m" />
 <noscript><style>.opening{display:none!important}.reveal,.line>span{opacity:1!important;transform:none!important}</style></noscript>
 
 <!-- Structured data -->
@@ -65,44 +65,16 @@
 </head>
 <body>
 
-<!-- ░░ Opening (cinematic loader) ░░ -->
-<div class="opening" id="opening" aria-hidden="false" aria-label="ロード中">
-  <div class="opening__vignette" aria-hidden="true"></div>
-  <div class="opening__corners" aria-hidden="true">
-    <span class="opening__corner opening__corner--tl"></span>
-    <span class="opening__corner opening__corner--tr"></span>
-    <span class="opening__corner opening__corner--bl"></span>
-    <span class="opening__corner opening__corner--br"></span>
+<!-- ░░ Opening — editorial gate reveal ░░ -->
+<div class="opening" id="opening" aria-hidden="false" aria-label="イントロ">
+  <div class="opening__panel opening__panel--top" aria-hidden="true"></div>
+  <div class="opening__panel opening__panel--bottom" aria-hidden="true"></div>
+  <div class="opening__center">
+    <p class="opening__eyebrow">Model / Actor — Kanto, Japan</p>
+    <h1 class="opening__name"><span class="op-mask"><span>SHOMA</span></span></h1>
+    <span class="opening__rule" aria-hidden="true"></span>
+    <p class="opening__tag"><span class="op-mask"><span>画面に残る、人になる。</span></span></p>
   </div>
-
-  <div class="opening__inner">
-    <p class="opening__eyebrow"><span>Model · Actor · Kanto</span></p>
-
-    <div class="opening__mark" aria-hidden="true">
-      <svg viewBox="0 0 120 120" fill="none">
-        <circle class="opening__ring" cx="60" cy="60" r="44" stroke="currentColor" stroke-width="1" />
-        <circle class="opening__ring opening__ring-2" cx="60" cy="60" r="32" stroke="currentColor" stroke-width="0.8" />
-        <circle cx="60" cy="60" r="3" fill="currentColor" />
-        <line x1="60" y1="8" x2="60" y2="20" stroke="currentColor" stroke-width="0.8" />
-        <line x1="60" y1="100" x2="60" y2="112" stroke="currentColor" stroke-width="0.8" />
-        <line x1="8" y1="60" x2="20" y2="60" stroke="currentColor" stroke-width="0.8" />
-        <line x1="100" y1="60" x2="112" y2="60" stroke="currentColor" stroke-width="0.8" />
-      </svg>
-    </div>
-
-    <p class="opening__name">SHOMA</p>
-
-    <div class="opening__progress">
-      <div class="opening__line"><div class="opening__fill" id="ldFill"></div></div>
-      <div class="opening__meta">
-        <span class="opening__label">Loading</span>
-        <span class="opening__count"><span id="ldCount">00</span><span class="opening__percent">%</span></span>
-      </div>
-    </div>
-
-    <div class="opening__dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-  </div>
-
   <button class="opening__skip" id="openingSkip" type="button">Skip <em>↦</em></button>
 </div>
 
@@ -500,6 +472,6 @@
   </div>
 </div>
 
-<script src="script.js?v=20260604l"></script>
+<script src="script.js?v=20260604m"></script>
 </body>
 </html>
