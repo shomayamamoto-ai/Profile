@@ -63,7 +63,7 @@
     }
 
     // Preload the montage frames, then play once they're ready (capped).
-    var srcs = ['assets/img/hero.webp', 'assets/img/work1.webp', 'assets/img/work2.webp'];
+    var srcs = ['assets/img/hero.webp', 'assets/img/stage.webp', 'assets/img/street.webp'];
     var done = 0;
     srcs.forEach(function (src) {
       var im = new Image();
