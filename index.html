@@ -366,7 +366,7 @@
   <div class="contact__inner">
     <p class="contact__eyebrow reveal">Booking &amp; Inquiries</p>
     <h2 class="contact__title reveal" style="--d:.1s">出演・撮影の<br />ご相談はこちらから。</h2>
-    <a href="#" class="contact__mail js-mail reveal" style="--d:.2s" data-cursor="Mail">メールでご連絡 <span class="contact__mail-ico" aria-hidden="true">✉</span></a>
+    <a href="#" class="contact__mail js-mail reveal" style="--d:.2s" data-m="c2hvbWEueWFtYW1vdG9AbHVtZW5pdW0ubmV0" data-cursor="Mail">メールでご連絡 <span class="contact__mail-ico" aria-hidden="true">✉</span></a>
 
     <div class="contact__channels reveal" style="--d:.3s">
       <a href="https://ig.me/m/showstagram.keio" class="chan" target="_blank" rel="noopener" data-cursor="Open">
@@ -408,6 +408,21 @@
 
 <!-- Floating back-to-top -->
 <a href="#top" class="fab" id="fab" aria-label="トップへ戻る" data-cursor="Top">↑</a>
+
+<!-- ░░ Mail popover ░░ -->
+<div class="mail-pop" id="mailPop" role="dialog" aria-modal="true" aria-label="メールで連絡" hidden>
+  <div class="mail-pop__card">
+    <button class="mail-pop__close" id="mailPopClose" aria-label="閉じる">✕</button>
+    <p class="mail-pop__label">出演・撮影のご相談</p>
+    <p class="mail-pop__addr" id="mailPopAddr"></p>
+    <div class="mail-pop__actions">
+      <a class="mail-pop__btn mail-pop__btn--primary" id="mailOpen" href="#">メールアプリで開く</a>
+      <a class="mail-pop__btn" id="mailGmail" href="#" target="_blank" rel="noopener">Gmail で送る</a>
+      <button class="mail-pop__btn" id="mailCopy" type="button">アドレスをコピー</button>
+    </div>
+    <p class="mail-pop__hint">ボタンが開かない場合は、コピーしてお使いのメールから送信してください。</p>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>

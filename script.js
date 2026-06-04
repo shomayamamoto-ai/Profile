@@ -154,16 +154,63 @@
     else if (e.key === 'ArrowRight') showLb(idx + 1);
   });
 
-  /* ---------- Obfuscated email (assembled only on interaction) ---------- */
-  function buildMail(el) {
-    var m = el.getAttribute('data-m');
+  /* ---------- Email (obfuscated, revealed only on click via popover) ---------- */
+  var EMAIL = '';
+  function decodeEmail(el) {
+    if (EMAIL) return EMAIL;
+    var m = el && el.getAttribute('data-m');
     if (!m) return '';
-    try { return 'mailto:' + atob(m); } catch (err) { return ''; }
+    try { EMAIL = atob(m); } catch (err) { EMAIL = ''; }
+    return EMAIL;
   }
-  Array.prototype.forEach.call(document.querySelectorAll('.js-mail'), function (el) {
-    el.addEventListener('click', function (e) {
-      var m = buildMail(el);
-      if (m) { e.preventDefault(); window.location.href = m; }
+
+  var pop = document.getElementById('mailPop');
+  var popAddr = document.getElementById('mailPopAddr');
+  var popOpen = document.getElementById('mailOpen');
+  var popGmail = document.getElementById('mailGmail');
+  var popCopy = document.getElementById('mailCopy');
+  var popClose = document.getElementById('mailPopClose');
+
+  function openPop(addr) {
+    if (!pop) { window.location.href = 'mailto:' + addr; return; }
+    if (popAddr) popAddr.textContent = addr;
+    if (popOpen) popOpen.setAttribute('href', 'mailto:' + addr);
+    if (popGmail) popGmail.setAttribute('href', 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(addr));
+    if (popCopy) popCopy.textContent = 'アドレスをコピー';
+    pop.classList.add('open');
+    pop.removeAttribute('hidden');
+  }
+  function closePop() { if (pop) pop.classList.remove('open'); }
+
+  // Event delegation: works regardless of how/when links are added.
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest ? e.target.closest('.js-mail') : null;
+    if (!trigger) return;
+    e.preventDefault();
+    var addr = decodeEmail(trigger);
+    if (addr) openPop(addr);
+  });
+
+  if (popCopy) {
+    popCopy.addEventListener('click', function () {
+      var addr = popAddr ? popAddr.textContent : EMAIL;
+      var done = function () { popCopy.textContent = 'コピーしました ✓'; };
+      var fail = function () { popCopy.textContent = '長押しでコピー'; };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(done, fail);
+      } else {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = addr; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); document.body.removeChild(ta); done();
+        } catch (err) { fail(); }
+      }
     });
+  }
+  if (popClose) popClose.addEventListener('click', closePop);
+  if (pop) pop.addEventListener('click', function (e) { if (e.target === pop) closePop(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePop();
   });
 })();

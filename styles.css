@@ -410,6 +410,37 @@ body.menu-open .nav__burger span:nth-child(2){bottom:9px;transform:rotate(-45deg
 .lightbox__nav:hover{background:var(--paper);color:var(--ink)}
 @media(max-width:560px){.lightbox__nav{position:absolute;bottom:24px;z-index:2}.lightbox__nav--prev{left:24px}.lightbox__nav--next{right:24px}}
 
+/* ===========================================================
+   MAIL POPOVER
+   =========================================================== */
+.mail-pop{
+  position:fixed;inset:0;z-index:650;display:flex;align-items:center;justify-content:center;
+  padding:24px;background:rgba(15,11,8,.6);backdrop-filter:blur(6px);
+  opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s var(--ease);
+}
+.mail-pop.open{opacity:1;visibility:visible}
+.mail-pop[hidden]{display:flex}
+.mail-pop__card{
+  position:relative;width:min(92vw,420px);background:var(--white);color:var(--ink);
+  border-radius:14px;padding:clamp(28px,5vw,40px);box-shadow:var(--shadow-lg);
+  transform:translateY(16px) scale(.98);transition:transform .4s var(--ease);text-align:center;
+}
+.mail-pop.open .mail-pop__card{transform:none}
+.mail-pop__close{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:.95rem;cursor:pointer;transition:.3s var(--ease)}
+.mail-pop__close:hover{background:var(--ink);color:var(--paper)}
+.mail-pop__label{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.mail-pop__addr{font-family:var(--mono);font-size:clamp(.95rem,3.4vw,1.12rem);font-weight:500;word-break:break-all;padding:14px 16px;background:var(--paper);border-radius:8px;border:1px solid var(--line);margin-bottom:22px;user-select:all}
+.mail-pop__actions{display:flex;flex-direction:column;gap:10px}
+.mail-pop__btn{
+  display:flex;align-items:center;justify-content:center;
+  padding:14px 18px;border-radius:44px;font-family:var(--mono);font-size:.85rem;letter-spacing:.06em;
+  border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;transition:.3s var(--ease);
+}
+.mail-pop__btn:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+.mail-pop__btn--primary{background:var(--ink);color:var(--paper)}
+.mail-pop__btn--primary:hover{background:var(--accent);border-color:var(--accent)}
+.mail-pop__hint{margin-top:18px;font-size:.78rem;font-weight:300;color:var(--ink-soft);line-height:1.7}
+
 /* ── Floating FAB ── */
 .fab{
   position:fixed;right:clamp(18px,4vw,34px);bottom:clamp(18px,4vw,34px);z-index:120;
