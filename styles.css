@@ -779,3 +779,9 @@ body{font-weight:400}
 .role__emoji{font-size:0!important;line-height:0;display:flex;align-items:center}
 .role__emoji::before{content:"";display:block;width:30px;height:2px;background:currentColor;opacity:.85}
 .strength__emoji{display:none!important}
+
+/* ── Phones: drop the hero background photo, use a clean dark panel ── */
+@media (max-width:600px){
+  .hero__media{display:none!important}
+  .hero{background:linear-gradient(180deg,#17120c 0%,#100b07 60%,#0c0805 100%)}
+}
