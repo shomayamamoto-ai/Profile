@@ -90,7 +90,7 @@ body.opening-off .opening{display:none}
 
 /* ---- viewfinder HUD ---- */
 .opening__hud{position:absolute;inset:clamp(20px,4.5vh,46px) clamp(20px,4.5vw,52px);z-index:5;pointer-events:none;opacity:0}
-.opening.play .opening__hud{animation:openFade .8s var(--ease) .3s forwards, openFadeOut .5s var(--ease) 4.1s forwards}
+.opening.play .opening__hud{animation:openFade .7s var(--ease) .25s forwards, openFadeOut .45s var(--ease) 3.0s forwards}
 .opening__bracket{position:absolute;width:26px;height:26px;border:2px solid rgba(243,239,232,.7)}
 .opening__bracket--tl{top:0;left:0;border-right:0;border-bottom:0}
 .opening__bracket--tr{top:0;right:0;border-left:0;border-bottom:0}
@@ -118,7 +118,7 @@ body.opening-off .opening{display:none}
 /* ---- bottom progress + skip ---- */
 .opening__progress{position:absolute;left:0;bottom:0;height:2px;width:100%;z-index:6;background:rgba(243,239,232,.12)}
 .opening__progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
-.opening.play .opening__progress i{animation:openProg 4.6s linear forwards}
+.opening.play .opening__progress i{animation:openProg 3.55s linear forwards}
 @keyframes openProg{to{width:100%}}
 .opening__skip{position:absolute;bottom:5.5vh;right:clamp(20px,5vw,48px);z-index:6;background:transparent;border:1px solid rgba(243,239,232,.35);color:var(--paper);
   font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;padding:9px 18px;border-radius:40px;cursor:pointer;pointer-events:auto;opacity:0;transition:opacity .5s,background .3s,color .3s}
@@ -126,29 +126,29 @@ body.opening-off .opening{display:none}
 .opening__skip:hover{background:var(--paper);color:var(--ink)}
 .opening.play .opening__skip{opacity:.85;transition-delay:.5s}
 
-/* ======== timeline (when .play is added) ======== */
-.opening.play .opening__bar--top{animation:barInTop .7s var(--ease) forwards, barOutTop .7s var(--ease) 4.0s forwards}
-.opening.play .opening__bar--bottom{animation:barInBottom .7s var(--ease) forwards, barOutBottom .7s var(--ease) 4.0s forwards}
+/* ======== timeline (when .play is added) — total ~3.55s ======== */
+.opening.play .opening__bar--top{animation:barInTop .6s var(--ease) forwards, barOutTop .6s var(--ease) 3.0s forwards}
+.opening.play .opening__bar--bottom{animation:barInBottom .6s var(--ease) forwards, barOutBottom .6s var(--ease) 3.0s forwards}
 @keyframes barInTop{from{transform:translateY(-100%)}to{transform:translateY(0)}}
 @keyframes barInBottom{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @keyframes barOutTop{from{transform:translateY(0)}to{transform:translateY(-100%)}}
 @keyframes barOutBottom{from{transform:translateY(0)}to{transform:translateY(100%)}}
 
-.opening.play .opening__frame--1{animation:frameCut 1.85s var(--ease) .15s forwards}
-.opening.play .opening__frame--2{animation:frameCut 1.7s var(--ease) 1.55s forwards}
-.opening.play .opening__frame--3{animation:frameHold 1.8s var(--ease) 2.95s forwards}
-@keyframes frameCut{0%{opacity:0;transform:scale(1.05)}16%{opacity:1}80%{opacity:1}100%{opacity:0;transform:scale(1.14)}}
-@keyframes frameHold{0%{opacity:0;transform:scale(1.08)}20%{opacity:1}100%{opacity:1;transform:scale(1.02)}}
+.opening.play .opening__frame--1{animation:frameCut 1.35s var(--ease) .1s forwards}
+.opening.play .opening__frame--2{animation:frameCut 1.25s var(--ease) 1.1s forwards}
+.opening.play .opening__frame--3{animation:frameHold 1.5s var(--ease) 2.15s forwards}
+@keyframes frameCut{0%{opacity:0;transform:scale(1.05)}18%{opacity:1}80%{opacity:1}100%{opacity:0;transform:scale(1.13)}}
+@keyframes frameHold{0%{opacity:0;transform:scale(1.08)}22%{opacity:1}100%{opacity:1;transform:scale(1.02)}}
 
 /* act 1 — eyebrow */
-.opening.play .opening__act--1{animation:openFade .9s var(--ease) .55s forwards, openFadeOut .55s var(--ease) 1.5s forwards}
+.opening.play .opening__act--1{animation:openFade .7s var(--ease) .4s forwards, openFadeOut .45s var(--ease) 1.15s forwards}
 /* act 2 — credits line */
-.opening.play .opening__act--2{animation:openFade .9s var(--ease) 1.85s forwards, openFadeOut .55s var(--ease) 2.95s forwards}
+.opening.play .opening__act--2{animation:openFade .7s var(--ease) 1.3s forwards, openFadeOut .45s var(--ease) 2.1s forwards}
 /* act 3 — name block */
-.opening.play .opening__act--3{animation:openFade .7s var(--ease) 3.0s forwards, openFadeOut .55s var(--ease) 4.15s forwards}
-.opening.play .opening__sub .line>span{transition:transform .9s var(--ease-out) 3.15s;transform:translateY(0)}
-.opening.play .opening__name .line>span{transition:transform 1s var(--ease-out) 3.4s;transform:translateY(0)}
-.opening.play .opening__tagline .line>span{transition:transform 1s var(--ease-out) 3.85s;transform:translateY(0)}
+.opening.play .opening__act--3{animation:openFade .55s var(--ease) 2.2s forwards, openFadeOut .45s var(--ease) 3.2s forwards}
+.opening.play .opening__sub .line>span{transition:transform .7s var(--ease-out) 2.3s;transform:translateY(0)}
+.opening.play .opening__name .line>span{transition:transform .8s var(--ease-out) 2.5s;transform:translateY(0)}
+.opening.play .opening__tagline .line>span{transition:transform .8s var(--ease-out) 2.85s;transform:translateY(0)}
 
 @keyframes openFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes openFadeOut{from{opacity:1}to{opacity:0;transform:translateY(-8px)}}
@@ -250,17 +250,6 @@ body.menu-open .nav__burger span:nth-child(2){bottom:9px;transform:rotate(-45deg
 .mobile-menu.open .mobile-menu__foot{opacity:1}
 .mobile-menu__foot a{font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;color:var(--paper);border-bottom:1px solid var(--accent);padding-bottom:3px;transition:color .3s}
 .mobile-menu__foot a:hover{color:var(--accent)}
-
-/* ── Breadcrumb (scroll-spy) ── */
-.crumbs{position:fixed;left:clamp(20px,5vw,64px);bottom:clamp(18px,4vh,32px);z-index:90;
-  display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;
-  color:#fff;mix-blend-mode:difference;opacity:0;transform:translateY(8px);transition:opacity .45s var(--ease),transform .45s var(--ease)}
-.crumbs.show{opacity:.92;transform:none}
-.crumbs a{text-transform:uppercase;transition:opacity .3s}
-.crumbs a:hover{opacity:.6}
-.crumbs__sep{color:var(--accent)}
-.crumbs__cur{text-transform:uppercase;font-weight:500}
-@media(max-width:560px){.crumbs{font-size:.66rem;gap:7px}}
 
 /* ── Buttons ── */
 .btn{

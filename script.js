@@ -18,13 +18,9 @@
     revealHero();
     // fully remove from layout after fade
     setTimeout(function () { document.body.classList.add('opening-off'); }, 900);
-    try { sessionStorage.setItem('introPlayed', '1'); } catch (e) {}
   }
 
-  var alreadyPlayed = false;
-  try { alreadyPlayed = sessionStorage.getItem('introPlayed') === '1'; } catch (e) {}
-
-  if (!opening || reduce || alreadyPlayed) {
+  if (!opening || reduce) {
     // skip the movie entirely
     document.body.classList.add('opening-off');
     revealHero();
@@ -56,10 +52,10 @@
       opening.classList.add('play');
       rafId = requestAnimationFrame(tick);
       // splice flashes synced to the frame cuts
-      setTimeout(flash, 1550);
-      setTimeout(flash, 2950);
-      // total timeline ~4.6s, then dissolve into the site
-      setTimeout(endOpening, 4650);
+      setTimeout(flash, 1100);
+      setTimeout(flash, 2150);
+      // total timeline ~3.55s, then dissolve into the site
+      setTimeout(endOpening, 3600);
     }
     var _end = endOpening;
     endOpening = function () { if (rafId) cancelAnimationFrame(rafId); _end(); };
@@ -81,34 +77,16 @@
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
-  /* ---------- Scroll progress + nav + fab + breadcrumb ---------- */
+  /* ---------- Scroll progress + nav + fab ---------- */
   var progress = document.getElementById('progress');
   var nav = document.getElementById('nav');
   var fab = document.getElementById('fab');
-  var crumbs = document.getElementById('crumbs');
-  var crumbCur = document.getElementById('crumbCur');
-  var sections = [
-    ['top', 'Top'], ['works', 'Works'], ['whatido', 'What I do'],
-    ['profile', 'Profile'], ['booking', 'Booking'], ['contact', 'Contact']
-  ];
-  var lastCrumb = '';
-  function updateCrumb(st) {
-    if (!crumbCur) return;
-    var mark = st + window.innerHeight * 0.42, cur = sections[0][1];
-    for (var i = 0; i < sections.length; i++) {
-      var el = document.getElementById(sections[i][0]);
-      if (el && el.offsetTop <= mark) cur = sections[i][1];
-    }
-    if (cur !== lastCrumb) { lastCrumb = cur; crumbCur.textContent = cur; }
-  }
   function onScroll() {
     var st = window.scrollY || doc.scrollTop;
     var h = doc.scrollHeight - window.innerHeight;
     if (progress) progress.style.width = (h > 0 ? (st / h) * 100 : 0) + '%';
     if (nav) nav.classList.toggle('is-scrolled', st > 40);
     if (fab) fab.classList.toggle('show', st > window.innerHeight * 0.9);
-    if (crumbs) crumbs.classList.toggle('show', st > 80);
-    updateCrumb(st);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
