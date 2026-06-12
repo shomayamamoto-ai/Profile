@@ -785,3 +785,72 @@ body{font-weight:400}
   .hero__media{display:none!important}
   .hero{background:linear-gradient(180deg,#17120c 0%,#100b07 60%,#0c0805 100%)}
 }
+
+/* ===========================================================
+   REFINEMENT PASS — quieter, flatter, more editorial
+   =========================================================== */
+
+/* generous rhythm */
+.section{max-width:1240px;padding:clamp(96px,13vw,176px) clamp(22px,5vw,64px)}
+.section__head{margin-bottom:clamp(48px,7vw,84px);position:relative}
+.section__head::before{
+  content:attr(data-num);position:absolute;top:-.34em;left:-.05em;z-index:-1;
+  font-family:var(--display);font-style:italic;font-weight:500;
+  font-size:clamp(5.6rem,15vw,10.5rem);line-height:1;color:var(--ink);opacity:.05;pointer-events:none;
+}
+.section__num{font-size:.72rem;letter-spacing:.3em}
+.section__sub{max-width:560px}
+
+/* hero — editorial details */
+.hero__eyebrow{display:flex;align-items:center;gap:14px}
+.hero__eyebrow::before{content:"";display:block;width:34px;height:1px;background:var(--accent-2);flex:none}
+.hero__tags span{border-radius:0;border-color:rgba(255,255,255,.38);background:rgba(10,8,5,.22);font-family:var(--mono);letter-spacing:.08em}
+.hero__side{
+  position:absolute;top:50%;right:clamp(20px,4vw,46px);transform:translateY(-50%);
+  writing-mode:vertical-rl;display:flex;align-items:center;gap:16px;z-index:2;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.66);
+}
+.hero__side::after{content:"";display:block;width:1px;height:60px;background:rgba(255,255,255,.4)}
+@media(max-width:860px){.hero__side{display:none}}
+
+/* square geometry everywhere */
+.nav__cta{border-radius:0!important}
+.btn,.mail-pop__card,.mail-pop__btn,.opening__skip,.skip-link,.hero__tags span{border-radius:0}
+
+/* flat surfaces: hairlines instead of shadows / lifts */
+.credit,.field,.booking__step,.comp,.profile__wrap{box-shadow:none}
+.credit:hover,.field:hover,.booking__step:hover{transform:none;box-shadow:none;border-color:var(--accent)}
+.role:hover{transform:none;box-shadow:none;border-color:var(--accent)}
+.works__frame{box-shadow:none;border:1px solid var(--line)}
+.works__gallery{gap:clamp(20px,3.2vw,42px)}
+.works__by{margin-top:12px;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+
+/* intro strip → quiet index */
+.intro__cell{border-left:0;border-top:1px solid var(--ink);padding-left:0;padding-top:20px}
+
+/* english → bare editorial block */
+.english__card{background:transparent;border:0;border-top:1px solid var(--line);border-radius:0;box-shadow:none;padding-left:0;padding-right:0}
+
+/* contact mail cta in mincho */
+.contact__mail{font-family:var(--serif);font-weight:500;letter-spacing:.06em}
+
+/* footer — oversized wordmark */
+.footer{display:block;padding:clamp(72px,10vw,128px) clamp(22px,5vw,64px) 40px;border-top:1px solid var(--line)}
+.footer__word{
+  margin:0 0 clamp(36px,6vw,64px);
+  font-family:var(--display);font-style:italic;font-weight:500;
+  font-size:clamp(4.2rem,15vw,12.5rem);line-height:.9;letter-spacing:.02em;color:var(--ink);
+}
+.footer__word span{color:var(--accent)}
+.footer__row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;border-top:1px solid var(--line);padding-top:26px}
+.footer__links{display:flex;gap:24px;font-family:var(--mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase}
+.footer__links a{color:var(--ink-soft);transition:color .3s}
+.footer__links a:hover{color:var(--accent)}
+
+/* mobile re-tune for the refinement layer */
+@media(max-width:600px){
+  .section{padding:66px 22px}
+  .section__head::before{font-size:4.8rem;top:-.3em}
+  .footer{padding:64px 22px calc(96px + env(safe-area-inset-bottom));text-align:left}
+  .footer__row{padding-top:20px}
+}

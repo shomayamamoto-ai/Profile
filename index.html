@@ -43,7 +43,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preload" as="image" href="assets/img/hero.webp" type="image/webp" />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=20260605a" />
+<link rel="stylesheet" href="styles.css?v=20260605b" />
 <noscript><style>.opening{display:none!important}.reveal,.line>span{opacity:1!important;transform:none!important}</style></noscript>
 
 <!-- Structured data -->
@@ -182,6 +182,8 @@
 
   <div class="hero__name" aria-hidden="true"><span>SHOMA</span></div>
 
+  <p class="hero__side" aria-hidden="true">SHOMA — Model&nbsp;/&nbsp;Actor</p>
+
   <a href="#intro" class="hero__scroll" aria-label="下へスクロール">
     <span>Scroll</span><i></i>
   </a>
@@ -211,7 +213,7 @@
 
 <!-- ░░ Works ░░ -->
 <section class="section works" id="works">
-  <div class="section__head">
+  <div class="section__head" data-num="01">
     <p class="section__num">01</p>
     <h2 class="section__title reveal">Pick up Works</h2>
   </div>
@@ -287,7 +289,7 @@
 
 <!-- ░░ Fields ░░ -->
 <section class="section fields">
-  <div class="section__head">
+  <div class="section__head" data-num="02">
     <p class="section__num">02</p>
     <h2 class="section__title reveal">選ばれやすい理由</h2>
   </div>
@@ -312,7 +314,7 @@
 
 <!-- ░░ What I do ░░ -->
 <section class="section whatido" id="whatido">
-  <div class="section__head">
+  <div class="section__head" data-num="03">
     <p class="section__num">03</p>
     <h2 class="section__title reveal">What I do</h2>
   </div>
@@ -348,7 +350,7 @@
 
 <!-- ░░ Strengths ░░ -->
 <section class="section strengths">
-  <div class="section__head">
+  <div class="section__head" data-num="04">
     <p class="section__num">04</p>
     <h2 class="section__title reveal">現場で強いところ</h2>
   </div>
@@ -376,7 +378,7 @@
 
 <!-- ░░ Profile ░░ -->
 <section class="section profile" id="profile">
-  <div class="section__head">
+  <div class="section__head" data-num="05">
     <p class="section__num">05</p>
     <h2 class="section__title reveal">Profile</h2>
   </div>
@@ -411,7 +413,7 @@
 
 <!-- ░░ Booking ░░ -->
 <section class="section booking" id="booking">
-  <div class="section__head">
+  <div class="section__head" data-num="06">
     <p class="section__num">06</p>
     <h2 class="section__title reveal">Booking</h2>
     <p class="section__sub reveal" style="--d:.1s">日程だけの確認でも大丈夫です。<br class="br-sp" />撮影日、媒体、ざっくりした内容を<br class="br-sp" />送ってください。条件や衣装、イメージは<br class="br-sp" />そこから詰められます。</p>
@@ -480,9 +482,16 @@
 </section>
 
 <footer class="footer">
-  <div class="footer__brand">SHOMA<span>.</span></div>
-  <p class="footer__copy">© <span id="year">2026</span> Shoma. All rights reserved.</p>
-  <a href="#top" class="footer__top" data-cursor="Top">Back to top ↑</a>
+  <p class="footer__word" aria-hidden="true">SHOMA<span>.</span></p>
+  <div class="footer__row">
+    <p class="footer__copy">© <span id="year">2026</span> Shoma. All rights reserved.</p>
+    <nav class="footer__links" aria-label="SNS">
+      <a href="https://www.instagram.com/showstagram.keio" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@shoma.model" target="_blank" rel="noopener">TikTok</a>
+      <a href="#" class="js-mail" data-m="c2hvbWEueWFtYW1vdG9AbHVtZW5pdW0ubmV0">Email</a>
+    </nav>
+    <a href="#top" class="footer__top" data-cursor="Top">Back to top ↑</a>
+  </div>
 </footer>
 
 <!-- ░░ Lightbox ░░ -->
@@ -520,6 +529,6 @@
   </div>
 </div>
 
-<script src="script.js?v=20260605a"></script>
+<script src="script.js?v=20260605b"></script>
 </body>
 </html>
