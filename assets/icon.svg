@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <rect width="512" height="512" fill="#15110d"/>
-  <text x="256" y="350" font-family="Georgia, 'Times New Roman', serif" font-size="300" font-style="italic" fill="#b5462e" text-anchor="middle">S</text>
+  <rect width="512" height="512" fill="#1b1916"/>
+  <text x="256" y="352" font-family="Georgia, 'Times New Roman', serif" font-size="300" font-style="italic" fill="#b8a079" text-anchor="middle">S</text>
+  <rect x="154" y="440" width="204" height="6" fill="#b8a079"/>
 </svg>
